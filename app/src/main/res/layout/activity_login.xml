@@ -9,12 +9,12 @@
     tools:context=".Login">
 
     <EditText
-        android:id="@+id/usernameEditTextLogin"
+        android:id="@+id/emailEditTextLogin"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:inputType="textCapWords"
+        android:inputType="textEmailAddress"
         android:layout_margin="20dp"
-        android:hint="@string/username_hint"
+        android:hint="@string/email_hint"
         android:textColorHint="#757575"/>
 
     <EditText

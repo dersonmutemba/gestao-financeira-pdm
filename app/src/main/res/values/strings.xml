@@ -6,4 +6,9 @@
     <string name="email_hint">Insira o seu email</string>
     <string name="go_back_button_text">&lt; Voltar</string>
     <string name="no_account_prompt">Ainda não possui uma conta?</string>
+    <string name="wrong_email_or_password_error">Email ou senha incorrectos</string>
+    <string name="empty_field_error">Preencha todos os campos</string>
+    <string name="different_passwords_error">Senhas diferentes</string>
+    <string name="email_already_used_error">Email já foi usado, insira outro!</string>
+    <string name="user_insertion_success">Usuário inserido com sucesso!</string>
 </resources>

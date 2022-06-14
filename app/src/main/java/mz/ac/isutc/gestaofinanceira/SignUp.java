@@ -38,35 +38,33 @@ public class SignUp extends AppCompatActivity {
                             editTextPassword.getText().toString()
                     );
                     if(result != -1) {
-                        editTextEmail.setText("");
-                        editTextPassword.setText("");
-                        editTextPasswordConfirmation.setText("");
-                        editTextUsername.setText("");
                         Toast.makeText(
                                 getApplicationContext(),
-                                "Usuário inserido com sucesso!",
+                                R.string.user_insertion_success,
                                 Toast.LENGTH_SHORT
                         ).show();
+                        cursor.close();
+                        db.close();
+                        finish();
                     }
                 } else {
                     Toast.makeText(
                             getApplicationContext(),
-                            "Email já foi usado, insira outro!",
+                            R.string.email_already_used_error,
                             Toast.LENGTH_LONG
                     ).show();
                 }
-                db.close();
             } else {
                 Toast.makeText(
                         getApplicationContext(),
-                        "Senhas diferentes",
+                        R.string.different_passwords_error,
                         Toast.LENGTH_LONG
                 ).show();
             }
         } else {
             Toast.makeText(
                     getApplicationContext(),
-                    "Preencha todos os campos",
+                    R.string.empty_field_error,
                     Toast.LENGTH_LONG
             ).show();
         }
