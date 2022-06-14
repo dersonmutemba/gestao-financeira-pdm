@@ -1,8 +1,10 @@
 package mz.ac.isutc.gestaofinanceira;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.Navigator;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.Preference;
@@ -23,11 +25,10 @@ public class Login extends AppCompatActivity {
     public void entrar(View view) {
         EditText editTextUsername = findViewById(R.id.usernameEditTextLogin);
         EditText editTextPassword = findViewById(R.id.passwordEditTextLogin);
+    }
 
-        SharedPreferences preferences = getSharedPreferences("SharedPrefs", MODE_PRIVATE);
-        String username = preferences.getString("Username", "/");
-        Log.i("Info", username);
-
-
+    public void goToRegistar(View view) {
+        Intent intent = new Intent(Login.this, SignUp.class);
+        startActivity(intent);
     }
 }

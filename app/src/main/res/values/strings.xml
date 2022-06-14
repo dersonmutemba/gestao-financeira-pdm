@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">Software de Gestão Financeira</string>
-    <string name="username_hint">Insira o seu Nome de Usuário</string>
+    <string name="username_hint">Insira o seu nome</string>
     <string name="password_hint">Insira a sua senha</string>
+    <string name="password_confirmation_hint">Confirme a sua senha</string>
+    <string name="email_hint">Insira o seu email</string>
+    <string name="go_back_button_text">&lt; Voltar</string>
+    <string name="no_account_prompt">Ainda não possui uma conta?</string>
 </resources>
