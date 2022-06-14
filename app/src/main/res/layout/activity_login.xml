@@ -27,8 +27,11 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="150dp"
+        style="@style/Widget.Material3.Button.ElevatedButton"
         android:text="Entrar"
+        android:textSize="18sp"
+        android:paddingHorizontal="40dp"
+        android:paddingVertical="10dp"
         android:onClick="entrar"/>
 
 </androidx.appcompat.widget.LinearLayoutCompat>

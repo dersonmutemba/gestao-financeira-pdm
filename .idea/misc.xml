@@ -3,7 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="app/src/main/res/layout/activity_login.xml" value="0.1621376811594203" />
+        <entry key="app/src/main/res/font-v26/raleway.xml" value="0.1" />
+        <entry key="app/src/main/res/font/fonts.xml" value="0.209375" />
+        <entry key="app/src/main/res/font/raleway.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.2" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.151268115942029" />
       </map>
     </option>
