@@ -1,7 +1,6 @@
 package mz.ac.isutc.gestaofinanceira;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.Navigator;
 
 import android.content.Context;
 import android.content.Intent;
