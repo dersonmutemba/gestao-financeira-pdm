@@ -5,13 +5,30 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:gravity="center"
     tools:context=".Login">
 
     <EditText
         android:layout_height="50dp"
         android:layout_width="match_parent"
-        android:layout_marginTop="80dp"
+        android:id="@+id/usernameEditTextLogin"
+        android:layout_marginVertical="20dp"
         android:layout_marginHorizontal="20dp"
         android:hint="@string/username_hint"/>
+
+    <EditText
+        android:layout_height="50dp"
+        android:layout_width="match_parent"
+        android:id="@+id/passwordEditTextLogin"
+        android:layout_marginVertical="20dp"
+        android:layout_marginHorizontal="20dp"
+        android:hint="@string/password_hint"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="150dp"
+        android:text="Entrar"
+        android:onClick="entrar"/>
 
 </androidx.appcompat.widget.LinearLayoutCompat>
