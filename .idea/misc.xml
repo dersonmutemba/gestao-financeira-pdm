@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable-hdpi/background_dark.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable-hdpi/background_light.xml" value="0.1975" />
+        <entry key="app/src/main/res/drawable/imagem_de_fundo_light_foreground.xml" value="0.1885" />
         <entry key="app/src/main/res/font-v26/raleway.xml" value="0.1" />
         <entry key="app/src/main/res/font/fonts.xml" value="0.209375" />
         <entry key="app/src/main/res/font/raleway.xml" value="0.22" />
