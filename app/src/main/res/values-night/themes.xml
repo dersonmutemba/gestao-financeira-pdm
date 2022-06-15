@@ -16,4 +16,6 @@
     </style>
 
     <item name="backgroud_image" type="drawable">@drawable/background_dark</item>
+    <item name="card_gradient" type="drawable">@drawable/dark_card_gradient</item>
+    <item name="add_icon_gradient" type="drawable">@drawable/light_card_gradient</item>
 </resources>
