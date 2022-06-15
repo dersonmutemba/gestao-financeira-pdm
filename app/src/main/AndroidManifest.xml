@@ -18,6 +18,7 @@
             android:exported="false" />
         <activity
             android:name=".Historic"
+            android:name=".CriarConta"
             android:exported="false" />
         <activity
             android:name=".SignUp"
