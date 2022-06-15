@@ -14,31 +14,10 @@
         android:theme="@style/Theme.GestaoFinanceira"
         tools:targetApi="31">
         <activity
-            android:name=".SingleEntidade"
+            android:name=".RecycleItem"
             android:exported="false" />
         <activity
-            android:name=".SingleConta"
-            android:exported="false" />
-        <activity
-            android:name=".CriarEntidade"
-            android:exported="false" />
-        <activity
-            android:name=".Contas"
-            android:exported="false" />
-        <activity
-            android:name=".Subscricoes"
-            android:exported="false" />
-        <activity
-            android:name=".Entidades"
-            android:exported="false" />
-        <activity
-            android:name=".DebitRegistry"
-            android:exported="false" />
-        <activity
-            android:name=".CreditRegistry"
-            android:exported="false" />
-        <activity
-            android:name=".CriarConta"
+            android:name=".Historic"
             android:exported="false" />
         <activity
             android:name=".SignUp"

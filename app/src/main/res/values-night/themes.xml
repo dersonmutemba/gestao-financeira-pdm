@@ -15,11 +15,5 @@
         <item name="fontFamily">@font/raleway</item>
     </style>
 
-    <item name="backgroud_image" type="drawable">@drawable/background_dark</item>
-    <item name="mancha_superior" type="drawable">@drawable/dark_mancha_superior</item>
-    <item name="add_card_gradient" type="drawable">@drawable/dark_card_gradient</item>
-    <item name="card_gradient" type="drawable">@drawable/dark_card_gradient_2</item>
-    <item name="primaryColor" type="color">#FF2D1A</item>
-    <item name="colorPrimaryVariant" type="color">#AE655F</item>
-    <item name="colorSecondaryVariant" type="color">#772F28</item>
+    <item name="colorPrimary" type="color">#772F28</item>
 </resources>
