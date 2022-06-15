@@ -11,4 +11,12 @@
     <string name="different_passwords_error">Senhas diferentes</string>
     <string name="email_already_used_error">Email já foi usado, insira outro!</string>
     <string name="user_insertion_success">Usuário inserido com sucesso!</string>
+
+    <string name="pages_inicio">Início</string>
+    <string name="pages_historico">Histórico</string>
+    <string name="pages_menu">Menu</string>
+    <string name="pages_estatisticas">Estatísticas</string>
+    <string name="pages_definicoes">Definições</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
