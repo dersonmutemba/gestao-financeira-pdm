@@ -14,4 +14,6 @@
         <!-- Customize your theme here. -->
         <item name="fontFamily">@font/raleway</item>
     </style>
+
+    <item name="colorPrimary" type="color">#273687</item>
 </resources>

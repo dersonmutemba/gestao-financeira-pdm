@@ -3,12 +3,17 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="app/src/main/res/font-v26/raleway.xml" value="0.1" />
-        <entry key="app/src/main/res/font/fonts.xml" value="0.209375" />
-        <entry key="app/src/main/res/font/raleway.xml" value="0.22" />
-        <entry key="app/src/main/res/layout/activity_login.xml" value="0.2" />
+        <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_baseline_access_time_36dp.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_baseline_account_balance_36dp.xml" value="0.122" />
+        <entry key="app/src/main/res/drawable/ic_baseline_credit_card_24.xml" value="0.122" />
+        <entry key="app/src/main/res/drawable/ic_baseline_monetization_on_24.xml" value="0.122" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.122" />
+        <entry key="app/src/main/res/layout/activity_historic.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_historico.xml" value="0.21" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.151268115942029" />
-        <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_recycle_item.xml" value="0.33" />
       </map>
     </option>
   </component>
@@ -17,5 +22,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.33" />
+      </ProjectState>
+    </option>
   </component>
 </project>
