@@ -38,6 +38,7 @@ public class ContaView extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRetainInstance(true);
         if (getArguments() != null) {
             accountName = getArguments().getString(ACCOUNT_NAME);
             accountAmount = getArguments().getDouble(ACCOUNT_AMOUNT);
@@ -54,16 +55,16 @@ public class ContaView extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
         TextView textViewAssociatedBank = getView().findViewById(R.id.associatedBank);
         TextView textViewAccountName = getView().findViewById(R.id.accountName);
         TextView textViewAccountAmount = getView().findViewById(R.id.accountAmount);
         textViewAssociatedBank.setText(associatedBank);
         textViewAccountName.setText(accountName);
         textViewAccountAmount.setText(accountAmount + " MT");
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
     }
 }

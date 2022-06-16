@@ -59,12 +59,9 @@ public class AdicionarConta extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_adicionar_conta, container, false);
     }
 
-    public void goToCriarConta(View view) {
-        Intent intent = new Intent(getActivity(), CriarConta.class);
-        startActivity(intent);
+    public void criarConta(View view) {
     }
 }

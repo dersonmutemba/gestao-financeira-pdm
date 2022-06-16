@@ -35,7 +35,10 @@ public class Login extends AppCompatActivity {
                     String password = cursor.getString(2);
                     if(editTextPassword.getText().toString().equals(password)) {
                         Intent intent = new Intent(Login.this, MainActivity.class);
-                        intent.putExtra(DatabaseVariables.USUARIO_KEY, editTextEmail.getText().toString());
+                        intent.putExtra(DatabaseVariables.USUARIO_TABLE,
+                                new Usuario(cursor.getString(0),
+                                        cursor.getString(1),
+                                        cursor.getString(2)));
                         startActivity(intent);
                         db.close();
                         cursor.close();

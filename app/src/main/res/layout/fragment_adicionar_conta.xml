@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AdicionarConta">
+    tools:context=".MainActivity">
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
@@ -21,7 +21,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:gravity="center"
-            android:background="@drawable/card_gradient">
+            android:background="@drawable/add_card_gradient">
 
             <ImageView
                 android:layout_width="60dp"

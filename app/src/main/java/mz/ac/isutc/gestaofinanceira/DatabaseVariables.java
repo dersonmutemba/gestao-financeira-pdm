@@ -10,4 +10,11 @@ public class DatabaseVariables {
                         USUARIO_NOME = "nome",
                         USUARIO_SENHA = "senha";
 
+    static final String CONTA_TABLE = "conta",
+                        CONTA_KEY = "id",
+                        CONTA_NOME = "nome",
+                        CONTA_SALDO = "saldo",
+                        CONTA_BANCO = "banco",
+                        CONTA_USUARIO = "usuario";
+
 }

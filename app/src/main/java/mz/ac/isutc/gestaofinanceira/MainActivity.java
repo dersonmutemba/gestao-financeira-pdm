@@ -3,8 +3,10 @@ package mz.ac.isutc.gestaofinanceira;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -18,12 +20,17 @@ public class MainActivity extends AppCompatActivity {
     Estatisticas estatisticas;
     Definicoes definicoes;
 
+    Usuario usuario;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        inicio = new Inicio();
+        Intent intent = getIntent();
+        usuario = (Usuario) intent.getSerializableExtra(DatabaseVariables.USUARIO_TABLE);
+
+        inicio = Inicio.newInstance(usuario);
         historico = new Historico();
         menu = new Menu();
         estatisticas = new Estatisticas();
@@ -54,5 +61,10 @@ public class MainActivity extends AppCompatActivity {
             return false;
         });
         bottomNavigationView.setSelectedItemId(R.id.nav_page1);
+    }
+
+    public void goToCriarConta(View view) {
+        Intent intent = new Intent(getApplicationContext(), CriarConta.class);
+        startActivity(intent);
     }
 }

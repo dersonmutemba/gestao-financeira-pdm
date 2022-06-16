@@ -28,6 +28,8 @@ public class CardListAdapter extends FragmentPagerAdapter {
                 return ContaView.newInstance("Conta Geral", 0, "");
             case 2:
                 return ContaView.newInstance("Salário", 1000, "Millenium BIM");
+            case 3:
+                return ContaView.newInstance("Salário", 1000, "Millenium BIM");
             default:
                 return null;
         }
