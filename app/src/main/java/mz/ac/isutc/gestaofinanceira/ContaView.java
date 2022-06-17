@@ -1,7 +1,9 @@
 package mz.ac.isutc.gestaofinanceira;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
+import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -58,5 +60,10 @@ public class ContaView extends Fragment {
         textViewAssociatedBank.setText(conta.getAssociatedBank());
         textViewAccountName.setText(conta.getAccountName());
         textViewAccountAmount.setText(conta.getAccountAmount() + " MT");
+        if(conta.getAccountAmount() < 0) {
+            textViewAccountAmount.setTextColor(Color.parseColor("#ED3A2D"));
+        } else if(conta.getAccountAmount() > 0) {
+            textViewAccountAmount.setTextColor(Color.parseColor("#4CAF50"));
+        }
     }
 }
