@@ -18,7 +18,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Locale;
+
 
 
 public class Historico extends Fragment {
@@ -49,6 +49,8 @@ public class Historico extends Fragment {
         list = getData();
 
         recyclerView = getView().findViewById(R.id.recyclerview);
+        recyclerView.setNestedScrollingEnabled(false);
+
         search = getView().findViewById(R.id.search_field);
 
         listiner = new ClickListiner() {
