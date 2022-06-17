@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CriarConta">
+    tools:context=".CreditRegistry">
 
     <ImageView
         android:layout_width="match_parent"
@@ -28,54 +28,48 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_margin="20dp"
+            android:tooltipText="@string/account_spinner_tooltip"
+            android:id="@+id/creditSpinnerAccount"/>
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_margin="20dp"
+            android:tooltipText="@string/category_spinner_tooltip"
+            android:id="@+id/creditSpinnerCategory"/>
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_margin="20dp"
+            android:tooltipText="@string/entity_spinner_tooltip"
+            android:id="@+id/creditSpinnerEntity"/>
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginVertical="10dp"
-            android:hint="@string/account_name_hint"
-            android:inputType="textCapSentences"
-            android:id="@+id/accountNameEditText"/>
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginBottom="40dp"
-            android:hint="@string/account_amount_hint"
-            android:inputType="numberDecimal"
-            android:text="0.0"
-            android:id="@+id/accountAmountEditText"/>
-
-        <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/checkboxBankAssociated"
-            android:onClick="contaAssociada"
-            android:text="@string/bank_associated_prompt"/>
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginBottom="10dp"
-            android:hint="@string/associated_bank_hint"
-            android:inputType="textCapSentences"
-            android:enabled="false"
-            android:id="@+id/associatedBankEditText"/>
+            android:layout_margin="20dp"
+            android:hint="@string/amount_hint"
+            android:id="@+id/creditEditTextAmount"
+            android:gravity="center"
+            android:inputType="numberDecimal"/>
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/Widget.Material3.Button.ElevatedButton"
-            android:text="@string/criar"
+            android:text="@string/registar"
             android:textSize="18sp"
             android:paddingHorizontal="40dp"
             android:paddingVertical="10dp"
-            android:onClick="criarConta"/>
+            android:onClick="registar"/>
 
     </LinearLayout>
 

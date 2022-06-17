@@ -19,4 +19,5 @@
     <item name="mancha_superior" type="drawable">@drawable/light_mancha_superior</item>
     <item name="add_card_gradient" type="drawable">@drawable/light_card_gradient</item>
     <item name="card_gradient" type="drawable">@drawable/light_card_gradient_2</item>
+    <item name="primaryColor" type="color">#273687</item>
 </resources>

@@ -17,4 +17,19 @@ public class DatabaseVariables {
                         CONTA_BANCO = "banco",
                         CONTA_USUARIO = "usuario";
 
+    static final String ENTIDADE_TABLE = "entidade",
+                        ENTIDADE_KEY = "id",
+                        ENTIDADE_NOME = "nome",
+                        ENTIDADE_CATEGORIA = "categoria",
+                        ENTIDADE_USUARIO = "usuario";
+
+    static final String MOVIMENTO_TABLE = "movimento",
+                        MOVIMENTO_KEY = "id",
+                        MOVIMENTO_TIPO = "tipo",
+                        MOVIMENTO_VALOR = "valor",
+                        MOVIMENTO_DATA = "data",
+                        MOVIMENTO_TITULO = "titulo",
+                        MOVIMENTO_HORA = "hora",
+                        MOVIMENTO_ENTIDADE = "entidade";
+
 }

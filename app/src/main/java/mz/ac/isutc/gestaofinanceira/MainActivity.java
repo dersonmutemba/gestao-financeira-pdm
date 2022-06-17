@@ -102,6 +102,17 @@ public class MainActivity extends AppCompatActivity {
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
+                if(item.getItemId() == R.id.transaction_credit) {
+                    Intent intent = new Intent(getApplicationContext(), CreditRegistry.class);
+                    intent.putExtra(DatabaseVariables.USUARIO_TABLE, usuario);
+                    startActivity(intent);
+                    return true;
+                } else if(item.getItemId() == R.id.transaction_debit) {
+                    Intent intent = new Intent(getApplicationContext(), DebitRegistry.class);
+                    intent.putExtra(DatabaseVariables.USUARIO_TABLE, usuario);
+                    startActivity(intent);
+                    return true;
+                }
                 return false;
             }
         });

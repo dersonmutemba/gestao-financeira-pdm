@@ -8,6 +8,19 @@ import static mz.ac.isutc.gestaofinanceira.DatabaseVariables.CONTA_TABLE;
 import static mz.ac.isutc.gestaofinanceira.DatabaseVariables.CONTA_USUARIO;
 import static mz.ac.isutc.gestaofinanceira.DatabaseVariables.DATABASE_NAME;
 import static mz.ac.isutc.gestaofinanceira.DatabaseVariables.DATABASE_VERSION;
+import static mz.ac.isutc.gestaofinanceira.DatabaseVariables.ENTIDADE_CATEGORIA;
+import static mz.ac.isutc.gestaofinanceira.DatabaseVariables.ENTIDADE_KEY;
+import static mz.ac.isutc.gestaofinanceira.DatabaseVariables.ENTIDADE_NOME;
+import static mz.ac.isutc.gestaofinanceira.DatabaseVariables.ENTIDADE_TABLE;
+import static mz.ac.isutc.gestaofinanceira.DatabaseVariables.ENTIDADE_USUARIO;
+import static mz.ac.isutc.gestaofinanceira.DatabaseVariables.MOVIMENTO_DATA;
+import static mz.ac.isutc.gestaofinanceira.DatabaseVariables.MOVIMENTO_ENTIDADE;
+import static mz.ac.isutc.gestaofinanceira.DatabaseVariables.MOVIMENTO_HORA;
+import static mz.ac.isutc.gestaofinanceira.DatabaseVariables.MOVIMENTO_KEY;
+import static mz.ac.isutc.gestaofinanceira.DatabaseVariables.MOVIMENTO_TABLE;
+import static mz.ac.isutc.gestaofinanceira.DatabaseVariables.MOVIMENTO_TIPO;
+import static mz.ac.isutc.gestaofinanceira.DatabaseVariables.MOVIMENTO_TITULO;
+import static mz.ac.isutc.gestaofinanceira.DatabaseVariables.MOVIMENTO_VALOR;
 import static mz.ac.isutc.gestaofinanceira.DatabaseVariables.USUARIO_KEY;
 import static mz.ac.isutc.gestaofinanceira.DatabaseVariables.USUARIO_NOME;
 import static mz.ac.isutc.gestaofinanceira.DatabaseVariables.USUARIO_SENHA;
@@ -44,7 +57,24 @@ public class Database extends SQLiteOpenHelper {
                 CONTA_BANCO + " TEXT," +
                 CONTA_USUARIO + " TEXT NOT NULL," +
                 " FOREIGN KEY (" + CONTA_USUARIO + ")" +
-                " REFERENCES " + USUARIO_TABLE + "(" + USUARIO_KEY +")" + ")");
+                " REFERENCES " + USUARIO_TABLE + "(" + USUARIO_KEY + ")" + ")");
+        db.execSQL("CREATE TABLE " + ENTIDADE_TABLE + "(" +
+                ENTIDADE_KEY + " NUMBER PRIMARY KEY," +
+                ENTIDADE_NOME + " TEXT NOT NULL," +
+                ENTIDADE_CATEGORIA + " TEXT," +
+                ENTIDADE_USUARIO + " TEXT NOT NULL," +
+                " FOREIGN KEY (" + ENTIDADE_USUARIO + ")" +
+                " REFERENCES " + USUARIO_TABLE + "(" + USUARIO_KEY + ")" + ")");
+        db.execSQL("CREATE TABLE " + MOVIMENTO_TABLE + "(" +
+                MOVIMENTO_KEY + "NUMBER PRIMARY KEY," +
+                MOVIMENTO_TIPO + "TEXT NOT NULL," +
+                MOVIMENTO_VALOR + "REAL NOT NULL," +
+                MOVIMENTO_DATA + "TEXT NOT NULL," +
+                MOVIMENTO_TITULO + "TEXT NOT NULL," +
+                MOVIMENTO_HORA + "TEXT NOT NULL," +
+                MOVIMENTO_ENTIDADE + "NUMBER NOT NULL," +
+                " FOREIGN KEY (" + MOVIMENTO_ENTIDADE + ")" +
+                " REFERENCES " + ENTIDADE_TABLE + "(" + ENTIDADE_KEY + ")" + ")");
     }
 
     @Override
@@ -110,4 +140,143 @@ public class Database extends SQLiteOpenHelper {
         }
         return contas;
     }
+
+    public long insertEntidade(long id, String nome, String categoria, long usuario) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(ENTIDADE_KEY, id);
+        contentValues.put(ENTIDADE_NOME, nome);
+        contentValues.put(ENTIDADE_CATEGORIA, categoria);
+        contentValues.put(ENTIDADE_USUARIO, usuario);
+        return sqLiteDatabase.insert(ENTIDADE_TABLE, null, contentValues);
+    }
+
+    public long insertEntidade(long id, String nome, long usuario) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(ENTIDADE_KEY, id);
+        contentValues.put(ENTIDADE_NOME, nome);
+        contentValues.put(ENTIDADE_USUARIO, usuario);
+        return sqLiteDatabase.insert(ENTIDADE_TABLE, null, contentValues);
+    }
+
+    public Cursor getEntidadesByName (String[] name) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        return sqLiteDatabase.rawQuery("SELECT * FROM " + ENTIDADE_TABLE + " WHERE " +
+                ENTIDADE_NOME + " = ?", name);
+    }
+
+    public Cursor getEntidadesByUsuario (String[] usuario) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        return sqLiteDatabase.rawQuery("SELECT * FROM " + ENTIDADE_TABLE + " WHERE " +
+                ENTIDADE_USUARIO + " = ?", usuario);
+    }
+
+    public Cursor getEntidadesByCategoria (String[] categoria) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        return sqLiteDatabase.rawQuery("SELECT * FROM " + ENTIDADE_TABLE + " WHERE " +
+                ENTIDADE_CATEGORIA + " = ?", categoria);
+    }
+
+    public ArrayList<Entidade> getEntidadesByNameArrayList(String[] name) {
+        Cursor cursor = getEntidadesByUsuario(name);
+        ArrayList<Entidade> entidades = new ArrayList<>();
+        for(cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
+            entidades.add(new Entidade(
+                    cursor.getLong(0),
+                    cursor.getString(1),
+                    cursor.getString(2),
+                    cursor.getLong(3)
+            ));
+        }
+        return entidades;
+    }
+
+    public ArrayList<Entidade> getEntidadesByUsuarioArrayList(String[] usuario) {
+        Cursor cursor = getEntidadesByUsuario(usuario);
+        ArrayList<Entidade> entidades = new ArrayList<>();
+        for(cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
+            entidades.add(new Entidade(
+                    cursor.getLong(0),
+                    cursor.getString(1),
+                    cursor.getString(2),
+                    cursor.getLong(3)
+            ));
+        }
+        return entidades;
+    }
+
+    public ArrayList<Entidade> getEntidadesByCategoriaArrayList(String[] categoria) {
+        Cursor cursor = getEntidadesByCategoria(categoria);
+        ArrayList<Entidade> entidades = new ArrayList<>();
+        for(cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
+            entidades.add(new Entidade(
+                    cursor.getLong(0),
+                    cursor.getString(1),
+                    cursor.getString(2),
+                    cursor.getLong(3)
+            ));
+        }
+        return entidades;
+    }
+
+    public long insertMovimento(long id, String tipo, double valor, String data, String titulo, String hora, long entidade) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(MOVIMENTO_KEY, id);
+        contentValues.put(MOVIMENTO_TIPO, tipo);
+        contentValues.put(MOVIMENTO_VALOR, valor);
+        contentValues.put(MOVIMENTO_DATA, data);
+        contentValues.put(MOVIMENTO_TITULO, titulo);
+        contentValues.put(MOVIMENTO_HORA, hora);
+        contentValues.put(MOVIMENTO_ENTIDADE, entidade);
+        return sqLiteDatabase.insert(ENTIDADE_TABLE, null, contentValues);
+    }
+
+    public Cursor getMovimentosByTipo (String[] tipo) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        return sqLiteDatabase.rawQuery("SELECT * FROM " + MOVIMENTO_TABLE + " WHERE " +
+                MOVIMENTO_TIPO + " =?", tipo);
+    }
+
+    public Cursor getMovimentosByEntidade (String[] entidade) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        return sqLiteDatabase.rawQuery("SELECT * FROM " + MOVIMENTO_TABLE + " WHERE " +
+                MOVIMENTO_ENTIDADE + " =?", entidade);
+    }
+
+    public ArrayList<Movimento> getMovimentosByTipoArrayList (String[] tipo) {
+        Cursor cursor = getMovimentosByTipo(tipo);
+        ArrayList<Movimento> movimentos = new ArrayList<>();
+        for(cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
+            movimentos.add(new Movimento(
+                    cursor.getLong(0),
+                    cursor.getString(1),
+                    cursor.getDouble(2),
+                    cursor.getString(3),
+                    cursor.getString(4),
+                    cursor.getString(5),
+                    cursor.getLong(6)
+            ));
+        }
+        return movimentos;
+    }
+
+    public ArrayList<Movimento> getMovimentosByEntidadeArrayList (String[] entidade) {
+        Cursor cursor = getMovimentosByTipo(entidade);
+        ArrayList<Movimento> movimentos = new ArrayList<>();
+        for(cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
+            movimentos.add(new Movimento(
+                    cursor.getLong(0),
+                    cursor.getString(1),
+                    cursor.getDouble(2),
+                    cursor.getString(3),
+                    cursor.getString(4),
+                    cursor.getString(5),
+                    cursor.getLong(6)
+            ));
+        }
+        return movimentos;
+    }
+
 }

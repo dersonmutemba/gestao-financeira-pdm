@@ -14,6 +14,12 @@
         android:theme="@style/Theme.GestaoFinanceira"
         tools:targetApi="31">
         <activity
+            android:name=".DebitRegistry"
+            android:exported="false" />
+        <activity
+            android:name=".CreditRegistry"
+            android:exported="false" />
+        <activity
             android:name=".CriarConta"
             android:exported="false" />
         <activity
