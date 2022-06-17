@@ -17,9 +17,6 @@
             android:name=".RecycleItem"
             android:exported="false" />
         <activity
-            android:name=".Historic"
-            android:exported="false" />
-        <activity
             android:name=".SignUp"
             android:exported="false" />
         <activity

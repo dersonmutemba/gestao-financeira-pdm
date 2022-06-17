@@ -3,13 +3,8 @@ package mz.ac.isutc.gestaofinanceira;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.os.Bundle;
 import android.widget.Toast;
-import android.widget.Toolbar;
-
-import com.google.android.material.navigation.NavigationView;
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;

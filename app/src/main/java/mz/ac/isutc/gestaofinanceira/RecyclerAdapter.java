@@ -4,16 +4,23 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Filter;
+import android.widget.Filterable;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
-public class RecyclerAdapter  extends RecyclerView.Adapter<ViewHoldermod>{
+public class RecyclerAdapter  extends RecyclerView.Adapter<ViewHoldermod> {
 
     List<Transaction> list = Collections.emptyList();
+    List<Transaction> exampleListFull;
 
     Context context;
 
@@ -21,8 +28,12 @@ public class RecyclerAdapter  extends RecyclerView.Adapter<ViewHoldermod>{
 
     public RecyclerAdapter(List<Transaction> list, Context context, ClickListiner listiner) {
         this.list = list;
+        this.exampleListFull = new ArrayList<>(list);
         this.context = context;
         this.listiner = listiner;
+    }
+
+    public RecyclerAdapter(Context context, List<Transaction> list) {
     }
 
     @NonNull
@@ -32,15 +43,14 @@ public class RecyclerAdapter  extends RecyclerView.Adapter<ViewHoldermod>{
         LayoutInflater inflater = LayoutInflater.from(context);
 
 
-        View photoView = inflater.inflate(R.layout.activity_recycle_item,parent, false);
+        View photoView = inflater.inflate(R.layout.activity_recycle_item, parent, false);
         ViewHoldermod viewHoldermod = new ViewHoldermod(photoView);
         return viewHoldermod;
     }
 
     @Override
     public void
-    onBindViewHolder(final ViewHoldermod viewHoldermod,final int position)
-    {
+    onBindViewHolder(final ViewHoldermod viewHoldermod, final int position) {
         final int index = viewHoldermod.getAdapterPosition();
         viewHoldermod.textViewTitle
                 .setText(list.get(position).getTitle());
@@ -54,8 +64,7 @@ public class RecyclerAdapter  extends RecyclerView.Adapter<ViewHoldermod>{
                 .setText(String.valueOf(list.get(position).getAmount()));
         viewHoldermod.view.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view)
-            {
+            public void onClick(View view) {
                 listiner.click(index);
             }
         });
@@ -67,8 +76,13 @@ public class RecyclerAdapter  extends RecyclerView.Adapter<ViewHoldermod>{
     }
 
     @Override
-    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+    public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
     }
 
+
+    public void filteredList(List<Transaction> filteredlist) {
+        list = filteredlist;
+        notifyDataSetChanged();
+    }
 }
