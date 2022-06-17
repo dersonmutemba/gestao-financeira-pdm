@@ -13,24 +13,18 @@ import android.widget.TextView;
 
 public class ContaView extends Fragment {
 
-    private static final String ACCOUNT_NAME = "accountName";
-    private static final String ACCOUNT_AMOUNT = "accountAmount";
-    private static final String ASSOCIATED_BANK = "associatedBank";
+    private static final String PARAM_ACCOUNT = "account";
 
-    private String accountName;
-    private double accountAmount;
-    private String associatedBank;
+    private Conta conta;
 
     public ContaView() {
         // Required empty public constructor
     }
 
-    public static ContaView newInstance(String accountName, double accountAmount, String associatedBank) {
+    public static ContaView newInstance(Conta conta) {
         ContaView fragment = new ContaView();
         Bundle args = new Bundle();
-        args.putString(ACCOUNT_NAME, accountName);
-        args.putDouble(ACCOUNT_AMOUNT, accountAmount);
-        args.putString(ASSOCIATED_BANK, associatedBank);
+        args.putSerializable(PARAM_ACCOUNT, conta);
         fragment.setArguments(args);
         return fragment;
     }
@@ -40,9 +34,7 @@ public class ContaView extends Fragment {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
         if (getArguments() != null) {
-            accountName = getArguments().getString(ACCOUNT_NAME);
-            accountAmount = getArguments().getDouble(ACCOUNT_AMOUNT);
-            associatedBank = getArguments().getString(ASSOCIATED_BANK);
+            conta = (Conta) getArguments().getSerializable(PARAM_ACCOUNT);
         }
     }
 
@@ -63,8 +55,8 @@ public class ContaView extends Fragment {
         TextView textViewAssociatedBank = getView().findViewById(R.id.associatedBank);
         TextView textViewAccountName = getView().findViewById(R.id.accountName);
         TextView textViewAccountAmount = getView().findViewById(R.id.accountAmount);
-        textViewAssociatedBank.setText(associatedBank);
-        textViewAccountName.setText(accountName);
-        textViewAccountAmount.setText(accountAmount + " MT");
+        textViewAssociatedBank.setText(conta.getAssociatedBank());
+        textViewAccountName.setText(conta.getAccountName());
+        textViewAccountAmount.setText(conta.getAccountAmount() + " MT");
     }
 }

@@ -3,6 +3,7 @@ package mz.ac.isutc.gestaofinanceira;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.MenuRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -12,8 +13,13 @@ import androidx.viewpager2.widget.ViewPager2;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
+
+import java.util.ArrayList;
 import java.util.Calendar;
 
 /**
@@ -61,15 +67,18 @@ public class Inicio extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         viewPagerCards = getView().findViewById(R.id.viewPagerCards);
+        ArrayList<ContaView> fragments = new ArrayList<ContaView>();
+        Database db = new Database(getContext());
+        ArrayList<Conta> contas = db.getContasArrayList(new String[] {usuario.getEmail()});
+        for(Conta conta : contas) {
+            fragments.add(ContaView.newInstance(conta));
+        }
 
-        final CardListAdapter adapter = new CardListAdapter(getContext(), getActivity().getSupportFragmentManager(), 4);
+        final CardListAdapter adapter = new CardListAdapter(getContext(), getChildFragmentManager(), fragments);
         viewPagerCards.setAdapter(adapter);
-    }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-
+        ExtendedFloatingActionButton fab = getView().findViewById(R.id.inicioFAB);
+        fab.setExtended(false);
         TextView textViewName = getView().findViewById(R.id.textNameInicio);
         TextView textViewDate = getView().findViewById(R.id.textDateInicio);
         textViewName.setText("Olá, " + usuario.getNome() + "!");
@@ -80,5 +89,29 @@ public class Inicio extends Fragment {
         textViewDate.setText((day.length() == 1 ?
                 "0" + day : day) + "/" + ((month.length() == 1) ?
                 "0" + month : month) + "/" + year);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        ArrayList<ContaView> fragments = new ArrayList<>();
+        final CardListAdapter adapter = new CardListAdapter(getContext(), getChildFragmentManager(), fragments);
+        viewPagerCards.setAdapter(adapter);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        ArrayList<ContaView> fragments = new ArrayList<>();
+        Database db = new Database(getContext());
+        ArrayList<Conta> contas = db.getContasArrayList(new String[] {usuario.getEmail()});
+        for(Conta conta : contas) {
+            fragments.add(ContaView.newInstance(conta));
+        }
+        final CardListAdapter adapter = new CardListAdapter(getContext(), getChildFragmentManager(), fragments);
+        adapter.notifyDataSetChanged();
+        viewPagerCards.setAdapter(adapter);
     }
 }

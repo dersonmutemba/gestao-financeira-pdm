@@ -1,6 +1,8 @@
 package mz.ac.isutc.gestaofinanceira;
 
-public class Conta {
+import java.io.Serializable;
+
+public class Conta implements Serializable {
 
     private long id;
     private String accountName, associatedBank, usuario;

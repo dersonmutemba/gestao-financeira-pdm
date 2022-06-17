@@ -18,10 +18,12 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.ListView;
 
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Database extends SQLiteOpenHelper {
 
@@ -36,18 +38,19 @@ public class Database extends SQLiteOpenHelper {
                 USUARIO_NOME + " TEXT NOT NULL," +
                 USUARIO_SENHA + " TEXT NOT NULL)");
         db.execSQL("CREATE TABLE " + CONTA_TABLE + " (" +
-                CONTA_KEY + "TEXT PRIMARY KEY," +
-                CONTA_NOME + "TEXT NOT NULL," +
-                CONTA_SALDO + "REAL NOT NULL," +
-                CONTA_BANCO + "TEXT," +
-                CONTA_USUARIO + "TEXT NOT NULL," +
-                "FOREIGN KEY (" + CONTA_USUARIO + ")" +
-                "REFERENCES " + USUARIO_TABLE + "(" + USUARIO_KEY +")" + ")");
+                CONTA_KEY + " NUMBER PRIMARY KEY," +
+                CONTA_NOME + " TEXT NOT NULL," +
+                CONTA_SALDO + " REAL NOT NULL," +
+                CONTA_BANCO + " TEXT," +
+                CONTA_USUARIO + " TEXT NOT NULL," +
+                " FOREIGN KEY (" + CONTA_USUARIO + ")" +
+                " REFERENCES " + USUARIO_TABLE + "(" + USUARIO_KEY +")" + ")");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        db.execSQL("DROP TABLE IF EXISTS " + USUARIO_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + CONTA_TABLE);
     }
 
     public long insertUsuario(String email, String username, String senha) {
@@ -100,8 +103,8 @@ public class Database extends SQLiteOpenHelper {
             contas.add(new Conta(
                     cursor.getLong(0),
                     cursor.getString(1),
-                    cursor.getString(2),
-                    cursor.getDouble(3),
+                    cursor.getString(3),
+                    cursor.getDouble(2),
                     cursor.getString(4)
             ));
         }

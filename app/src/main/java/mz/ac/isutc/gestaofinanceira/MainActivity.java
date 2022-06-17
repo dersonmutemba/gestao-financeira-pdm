@@ -3,13 +3,20 @@ package mz.ac.isutc.gestaofinanceira;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.view.ContextThemeWrapper;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationBarView;
 
 public class MainActivity extends AppCompatActivity {
@@ -65,6 +72,39 @@ public class MainActivity extends AppCompatActivity {
 
     public void goToCriarConta(View view) {
         Intent intent = new Intent(getApplicationContext(), CriarConta.class);
+        intent.putExtra(DatabaseVariables.USUARIO_TABLE, usuario);
         startActivity(intent);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    public void showMenu(View view) {
+        ExtendedFloatingActionButton fab = (ExtendedFloatingActionButton) view;
+        if(fab.isExtended())
+            fab.shrink();
+        else
+            fab.extend();
+        Context wrapper = new ContextThemeWrapper(this, R.style.Theme_GestaoFinanceira);
+        PopupMenu popupMenu = new PopupMenu(wrapper, view);
+        popupMenu.inflate(R.menu.transaction_menu);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            popupMenu.setForceShowIcon(true);
+        }
+        popupMenu.setOnDismissListener(new PopupMenu.OnDismissListener() {
+            @Override
+            public void onDismiss(PopupMenu menu) {
+                fab.shrink();
+            }
+        });
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                return false;
+            }
+        });
+        popupMenu.show();
     }
 }

@@ -9,16 +9,18 @@
         <entry key="app/src/main/res/drawable/dark_card_gradient.xml" value="0.1975" />
         <entry key="app/src/main/res/drawable/dark_card_gradient_2.xml" value="0.1975" />
         <entry key="app/src/main/res/drawable/dark_mancha_superior.xml" value="0.1975" />
+        <entry key="app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.2095" />
         <entry key="app/src/main/res/drawable/imagem_de_fundo_light_foreground.xml" value="0.1885" />
         <entry key="app/src/main/res/drawable/light_card_gradient.xml" value="0.1975" />
         <entry key="app/src/main/res/drawable/light_card_gradient_2.xml" value="0.1975" />
         <entry key="app/src/main/res/drawable/light_mancha_superior.xml" value="0.1975" />
         <entry key="app/src/main/res/drawable/mancha_superior.xml" value="0.167" />
         <entry key="app/src/main/res/drawable/mancha_superior_gradient.xml" value="0.167" />
+        <entry key="app/src/main/res/drawable/plus.xml" value="0.167" />
         <entry key="app/src/main/res/font-v26/raleway.xml" value="0.1" />
         <entry key="app/src/main/res/font/fonts.xml" value="0.209375" />
         <entry key="app/src/main/res/font/raleway.xml" value="0.22" />
-        <entry key="app/src/main/res/layout/activity_criar_conta.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_criar_conta.xml" value="0.1721014492753623" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.2" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.25" />
@@ -29,7 +31,7 @@
         <entry key="app/src/main/res/layout/fragment_estatisticas.xml" value="0.17617753623188406" />
         <entry key="app/src/main/res/layout/fragment_historico.xml" value="0.17617753623188406" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/fragment_inicio.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_inicio.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_menu.xml" value="0.17617753623188406" />
         <entry key="app/src/main/res/layout/layout.xml" value="0.17617753623188406" />
         <entry key="app/src/main/res/layout/layout_base.xml" value="0.23479318734793186" />
@@ -37,6 +39,7 @@
         <entry key="app/src/main/res/layout/sample_accounts__view.xml" value="0.17617753623188406" />
         <entry key="app/src/main/res/layout/sample_accounts_view.xml" value="0.33" />
         <entry key="app/src/main/res/menu/menu.xml" value="0.20104166666666667" />
+        <entry key="app/src/main/res/menu/transaction_menu.xml" value="0.20104166666666667" />
       </map>
     </option>
   </component>

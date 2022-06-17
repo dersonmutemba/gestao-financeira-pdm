@@ -15,6 +15,13 @@
     <string name="different_passwords_error">Senhas diferentes</string>
     <string name="email_already_used_error">Email já foi usado, insira outro!</string>
     <string name="user_insertion_success">Usuário inserido com sucesso!</string>
+    <string name="account_creation_success">Conta criada com sucesso!</string>
+    
+    <string name="insertion_error">Erro na inserção</string>
+
+    <string name="transaction_credit">Crédito</string>
+    <string name="transaction_debit">Débito</string>
+    <string name="fab_description">Adicionar Movimento</string>
 
     <string name="criar">Criar</string>
 
@@ -23,4 +30,6 @@
     <string name="pages_menu">Menu</string>
     <string name="pages_estatisticas">Estatísticas</string>
     <string name="pages_definicoes">Definições</string>
+
+    <string name="last_account_id_key">lastAccountID</string>
 </resources>
