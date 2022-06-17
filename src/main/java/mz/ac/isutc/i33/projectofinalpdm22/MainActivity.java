@@ -1,31 +1,34 @@
 package mz.ac.isutc.i33.projectofinalpdm22;
 
-import static android.provider.AlarmClock.EXTRA_MESSAGE;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.view.View;
-import android.widget.EditText;
-
-import java.util.ArrayList;
-import java.util.Collections;
+import android.widget.Toast;
 
 public class
-MainActivity extends AppCompatActivity {
+MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     Spinner spinner;
     Button btnPerfil;
+    private String [] moedas = {"Metical MZN", "Rand RND", "Euro EUR", "Dollar DLR"};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        spinner = findViewById(R.id.spinnerMoedas);
+        spinner.setOnItemSelectedListener(this);
 
-        setSpinner();
+        ArrayAdapter adpt = new ArrayAdapter(this, android.R.layout.simple_spinner_item, moedas);
+        adpt.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        spinner.setAdapter(adpt);
 
         btnPerfil = findViewById(R.id.btPerfil);
         btnPerfil.setOnClickListener(new View.OnClickListener() {
@@ -40,19 +43,13 @@ MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        Toast.makeText(this, moedas[position],Toast.LENGTH_SHORT).show();
+    }
 
-    private void setSpinner() {
-        spinner = findViewById(R.id.spinnerMoedas);
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
 
-        ArrayList<String> sizes = new ArrayList<>();
-        sizes.add("Metical MZN");
-        sizes.add("Rand RND");
-        sizes.add("Euro EUR");
-        sizes.add("Dollar DLR");
-
-        ArrayAdapter adpt = new ArrayAdapter(this, android.R.layout.simple_spinner_item, sizes);
-        adpt.setDropDownViewResource(android.R.layout.simple_spinner_item);
-
-        spinner.setAdapter(adpt);
     }
 }
