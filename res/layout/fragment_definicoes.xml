@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Definicoes">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_margin="10dp"
+        android:text="@string/pages_definicoes"
+        android:textFontWeight="900" />
+
+    <?xml version="1.0" encoding="utf-8"?>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="472dp"
+        android:orientation="vertical"
+        tools:context=".Definicoes">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="50dp">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="110dp"
+                android:orientation="horizontal"
+                android:paddingStart="30dp"
+                android:paddingEnd="30dp">
+
+                <TextView
+                    android:id="@+id/txMudarNome"
+                    android:layout_width="108dp"
+                    android:layout_height="51dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/raleway"
+                    android:paddingStart="20dp"
+                    android:paddingLeft="20dp"
+                    android:text="Perfil"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp" />
+
+                <Button
+                    android:id="@+id/btPerfil"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@color/white"
+                    android:fontFamily="@font/raleway"
+                    android:text=">"
+                    android:textColor="@android:color/black"
+                    android:textSize="30sp"
+                    app:backgroundTint="@color/white" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="110dp"
+                android:orientation="horizontal"
+                android:paddingStart="30dp"
+                android:paddingEnd="30dp">
+
+                <TextView
+                    android:id="@+id/txTema"
+                    android:layout_width="wrap_content"
+                    android:layout_height="51dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/raleway"
+                    android:paddingStart="30dp"
+                    android:paddingLeft="30dp"
+                    android:text="Tema"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/txTemaClaro"
+                    android:layout_width="89dp"
+                    android:layout_height="51dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/raleway"
+                    android:paddingStart="20dp"
+                    android:paddingLeft="20dp"
+                    android:text="Light"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp" />
+
+                <Switch
+                    android:id="@+id/switchTema"
+                    android:layout_width="57dp"
+                    android:layout_height="53dp"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/txTemaEscuro"
+                    android:layout_width="wrap_content"
+                    android:layout_height="51dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/raleway"
+                    android:paddingStart="20dp"
+                    android:paddingLeft="20dp"
+                    android:text="Dark"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="110dp"
+                android:orientation="horizontal"
+                android:paddingStart="30dp"
+                android:paddingEnd="30dp">
+
+                <TextView
+                    android:id="@+id/txMudarSenha"
+                    android:layout_width="353dp"
+                    android:layout_height="51dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/raleway"
+                    android:paddingStart="20dp"
+                    android:paddingLeft="20dp"
+                    android:text="Moeda corrente"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp" />
+
+                <Spinner
+                    android:id="@+id/spinnerMoedas"
+                    android:layout_width="match_parent"
+                    android:layout_height="51dp"
+                    android:layout_weight="1" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="110dp"
+                android:orientation="horizontal"
+                android:paddingStart="30dp"
+                android:paddingEnd="30dp">
+
+
+                <Button
+                    android:id="@+id/btGuardarDados"
+                    android:layout_width="wrap_content"
+                    android:layout_height="73dp"
+                    android:layout_weight="1"
+                    android:ellipsize="middle"
+                    android:fontFamily="@font/raleway"
+                    android:shadowColor="@android:color/black"
+                    android:text="Limpar Dados"
+                    android:textColor="@android:color/black"
+                    app:backgroundTint="@color/white" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
