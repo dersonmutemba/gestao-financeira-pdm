@@ -3,7 +3,6 @@ package mz.ac.isutc.gestaofinanceira;
 import android.graphics.Color;
 import android.os.Bundle;
 
-import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;

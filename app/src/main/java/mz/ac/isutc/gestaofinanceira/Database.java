@@ -31,12 +31,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.widget.ListView;
 
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Database extends SQLiteOpenHelper {
 
@@ -66,21 +64,23 @@ public class Database extends SQLiteOpenHelper {
                 " FOREIGN KEY (" + ENTIDADE_USUARIO + ")" +
                 " REFERENCES " + USUARIO_TABLE + "(" + USUARIO_KEY + ")" + ")");
         db.execSQL("CREATE TABLE " + MOVIMENTO_TABLE + "(" +
-                MOVIMENTO_KEY + "NUMBER PRIMARY KEY," +
-                MOVIMENTO_TIPO + "TEXT NOT NULL," +
-                MOVIMENTO_VALOR + "REAL NOT NULL," +
-                MOVIMENTO_DATA + "TEXT NOT NULL," +
-                MOVIMENTO_TITULO + "TEXT NOT NULL," +
-                MOVIMENTO_HORA + "TEXT NOT NULL," +
-                MOVIMENTO_ENTIDADE + "NUMBER NOT NULL," +
+                MOVIMENTO_KEY + " NUMBER PRIMARY KEY," +
+                MOVIMENTO_TIPO + " TEXT NOT NULL," +
+                MOVIMENTO_VALOR + " REAL NOT NULL," +
+                MOVIMENTO_DATA + " TEXT NOT NULL," +
+                MOVIMENTO_TITULO + " TEXT NOT NULL," +
+                MOVIMENTO_HORA + " TEXT NOT NULL," +
+                MOVIMENTO_ENTIDADE + " NUMBER NOT NULL," +
                 " FOREIGN KEY (" + MOVIMENTO_ENTIDADE + ")" +
                 " REFERENCES " + ENTIDADE_TABLE + "(" + ENTIDADE_KEY + ")" + ")");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + USUARIO_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + MOVIMENTO_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + ENTIDADE_TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + CONTA_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + USUARIO_TABLE);
     }
 
     public long insertUsuario(String email, String username, String senha) {
@@ -90,6 +90,21 @@ public class Database extends SQLiteOpenHelper {
         contentValues.put(USUARIO_NOME, username);
         contentValues.put(USUARIO_SENHA, senha);
         return sqLiteDatabase.insert(USUARIO_TABLE, null, contentValues);
+    }
+
+    public long updateUsuario(String email, String username, String senha) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(USUARIO_NOME, username);
+        contentValues.put(USUARIO_SENHA, senha);
+        return sqLiteDatabase.update(USUARIO_TABLE, contentValues,
+                "WHERE " + USUARIO_KEY + " =?", new String[]{email});
+    }
+
+    public long removeUsuario(String email) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        return sqLiteDatabase.delete(USUARIO_TABLE,
+                "WHERE " + USUARIO_KEY + " =?", new String[]{email});
     }
 
     public Cursor getUsuario (String[] email) {
@@ -120,6 +135,32 @@ public class Database extends SQLiteOpenHelper {
         return sqLiteDatabase.insert(CONTA_TABLE, null, contentValues);
     }
 
+    public long updateConta(long id, String accountName, String associatedBank,
+                            double accountAmount) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(CONTA_NOME, accountName);
+        contentValues.put(CONTA_BANCO, associatedBank);
+        contentValues.put(CONTA_SALDO, accountAmount);
+        return sqLiteDatabase.update(CONTA_TABLE, contentValues,
+                CONTA_KEY + " =?", new String[]{id + ""});
+    }
+
+    public long updateConta(long id, String accountName, double accountAmount) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(CONTA_NOME, accountName);
+        contentValues.put(CONTA_SALDO, accountAmount);
+        return sqLiteDatabase.update(CONTA_TABLE, contentValues,
+                CONTA_KEY + " =?", new String[]{id + ""});
+    }
+
+    public long removeConta(long id) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        return sqLiteDatabase.delete(CONTA_TABLE,
+                CONTA_KEY + " =?", new String[]{id + ""});
+    }
+
     public Cursor getContas (String[] usuarios) {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         return sqLiteDatabase.rawQuery("SELECT * FROM " + CONTA_TABLE + " WHERE " +
@@ -141,7 +182,7 @@ public class Database extends SQLiteOpenHelper {
         return contas;
     }
 
-    public long insertEntidade(long id, String nome, String categoria, long usuario) {
+    public long insertEntidade(long id, String nome, String categoria, String usuario) {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(ENTIDADE_KEY, id);
@@ -151,13 +192,19 @@ public class Database extends SQLiteOpenHelper {
         return sqLiteDatabase.insert(ENTIDADE_TABLE, null, contentValues);
     }
 
-    public long insertEntidade(long id, String nome, long usuario) {
+    public long updateEntidade(long id, String nome, String categoria) {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(ENTIDADE_KEY, id);
         contentValues.put(ENTIDADE_NOME, nome);
-        contentValues.put(ENTIDADE_USUARIO, usuario);
-        return sqLiteDatabase.insert(ENTIDADE_TABLE, null, contentValues);
+        contentValues.put(ENTIDADE_CATEGORIA, categoria);
+        return sqLiteDatabase.update(ENTIDADE_TABLE, contentValues,
+                ENTIDADE_KEY + " =?", new String[]{id + ""});
+    }
+
+    public long removeEntidade(long id) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        return sqLiteDatabase.delete(ENTIDADE_TABLE,
+                ENTIDADE_KEY + " =?", new String[]{id + ""});
     }
 
     public Cursor getEntidadesByName (String[] name) {
@@ -179,14 +226,14 @@ public class Database extends SQLiteOpenHelper {
     }
 
     public ArrayList<Entidade> getEntidadesByNameArrayList(String[] name) {
-        Cursor cursor = getEntidadesByUsuario(name);
+        Cursor cursor = getEntidadesByName(name);
         ArrayList<Entidade> entidades = new ArrayList<>();
         for(cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
             entidades.add(new Entidade(
                     cursor.getLong(0),
                     cursor.getString(1),
                     cursor.getString(2),
-                    cursor.getLong(3)
+                    cursor.getString(3)
             ));
         }
         return entidades;
@@ -200,7 +247,7 @@ public class Database extends SQLiteOpenHelper {
                     cursor.getLong(0),
                     cursor.getString(1),
                     cursor.getString(2),
-                    cursor.getLong(3)
+                    cursor.getString(3)
             ));
         }
         return entidades;
@@ -214,7 +261,7 @@ public class Database extends SQLiteOpenHelper {
                     cursor.getLong(0),
                     cursor.getString(1),
                     cursor.getString(2),
-                    cursor.getLong(3)
+                    cursor.getString(3)
             ));
         }
         return entidades;

@@ -8,12 +8,15 @@
     <string name="associated_bank_hint">Insira o nome do banco</string>
     <string name="account_amount_hint">Saldo da conta</string>
     <string name="amount_hint">Insira o valor</string>
+    <string name="entity_hint">Insira o nome da entidade</string>
 
     <string name="account_spinner_tooltip">Selecione a conta</string>
-    <string name="category_spinner_tooltip">Selecione e categoria da Entidade</string>
+    <string name="category_spinner_tooltip">Selecione a categoria da Entidade</string>
     <string name="entity_spinner_tooltip">Selecione a entidade</string>
 
     <string name="bank_associated_prompt">A conta está associada a um banco?</string>
+    <string name="category_prompt">Deseja especificar a categoria?</string>
+
     <string name="go_back_button_text">Voltar</string>
     <string name="no_account_prompt">Ainda não possui uma conta?</string>
     <string name="wrong_email_or_password_error">Email ou senha incorrectos</string>
@@ -22,8 +25,12 @@
     <string name="email_already_used_error">Email já foi usado, insira outro!</string>
     <string name="user_insertion_success">Usuário inserido com sucesso!</string>
     <string name="account_creation_success">Conta criada com sucesso!</string>
+    <string name="entity_creation_success">Entidade criada com sucesso</string>
+    <string name="successful_update">Actualização feita com sucesso!</string>
+    <string name="successful_deletion">Remoção feita com sucesso!</string>
 
     <string name="insertion_error">Erro na inserção</string>
+    <string name="error">Erro!</string>
 
     <string name="transaction_credit">Crédito</string>
     <string name="transaction_debit">Débito</string>
@@ -31,6 +38,12 @@
 
     <string name="criar">Criar</string>
     <string name="registar">Registar</string>
+    <string name="remover">Remover</string>
+    <string name="guardar">Guardar</string>
+
+    <string name="add_entity">Adicionar Entidade</string>
+    <string name="add_subscription">Adicionar Subscrição</string>
+    <string name="add_conta">Adicionar Conta</string>
 
     <string name="pages_inicio">Início</string>
     <string name="pages_historico">Histórico</string>
@@ -38,7 +51,12 @@
     <string name="pages_estatisticas">Estatísticas</string>
     <string name="pages_definicoes">Definições</string>
 
+    <string name="menu_entidade">Entidades</string>
+    <string name="menu_contas">Contas</string>
+    <string name="menu_subscriptions">Subscrições</string>
+
     <string name="last_account_id_key">lastAccountID</string>
+    <string name="last_entity_id_key">lastEntityID</string>
 
     <string-array name="debit_categories">
         <item>Serviços</item>

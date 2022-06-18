@@ -1,6 +1,8 @@
 package mz.ac.isutc.gestaofinanceira;
 
-public class Movimento {
+import java.io.Serializable;
+
+public class Movimento implements Serializable {
 
     long id;
     String tipo;

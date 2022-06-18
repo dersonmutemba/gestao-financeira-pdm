@@ -10,6 +10,11 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import mz.ac.isutc.gestaofinanceira.Database;
+import mz.ac.isutc.gestaofinanceira.DatabaseVariables;
+import mz.ac.isutc.gestaofinanceira.Usuario;
+import mz.ac.isutc.gestaofinanceira.R;
+
 public class CriarConta extends AppCompatActivity {
 
     @Override

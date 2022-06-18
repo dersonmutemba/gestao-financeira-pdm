@@ -1,19 +1,21 @@
 package mz.ac.isutc.gestaofinanceira;
 
-public class Entidade {
+import java.io.Serializable;
+
+public class Entidade implements Serializable {
 
     long id;
     String nome, categoria;
-    long usuario;
+    String usuario;
 
-    public Entidade(long id, String nome, String categoria, long usuario) {
+    public Entidade(long id, String nome, String categoria, String usuario) {
         this.id = id;
         this.nome = nome;
         this.categoria = categoria;
         this.usuario = usuario;
     }
 
-    public Entidade(long id, String nome, long usuario) {
+    public Entidade(long id, String nome, String usuario) {
         this.id = id;
         this.nome = nome;
         this.usuario = usuario;
@@ -39,11 +41,11 @@ public class Entidade {
         this.categoria = categoria;
     }
 
-    public long getUsuario() {
+    public String getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(long usuario) {
+    public void setUsuario(String usuario) {
         this.usuario = usuario;
     }
 }

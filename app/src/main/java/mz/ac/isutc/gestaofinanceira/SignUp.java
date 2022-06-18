@@ -2,12 +2,14 @@ package mz.ac.isutc.gestaofinanceira;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Application;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import mz.ac.isutc.gestaofinanceira.Database;
+import mz.ac.isutc.gestaofinanceira.R;
 
 public class SignUp extends AppCompatActivity {
 

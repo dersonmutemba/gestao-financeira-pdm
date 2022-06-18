@@ -20,4 +20,6 @@
     <item name="add_card_gradient" type="drawable">@drawable/light_card_gradient</item>
     <item name="card_gradient" type="drawable">@drawable/light_card_gradient_2</item>
     <item name="primaryColor" type="color">#273687</item>
+    <item name="colorPrimaryVariant" type="color">#182881</item>
+    <item name="colorSecondaryVariant" type="color">#8B9DFF</item>
 </resources>
