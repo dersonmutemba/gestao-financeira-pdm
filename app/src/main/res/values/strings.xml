@@ -28,4 +28,8 @@
     <string name="pages_menu">Menu</string>
     <string name="pages_estatisticas">Estatísticas</string>
     <string name="pages_definicoes">Definições</string>
+    <string name="activos">Activos</string>
+    <string name="passivos">Passivos</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
