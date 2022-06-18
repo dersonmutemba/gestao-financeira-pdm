@@ -37,6 +37,12 @@
     <string name="transaction_credit">Crédito</string>
     <string name="transaction_debit">Débito</string>
     <string name="fab_description">Adicionar Movimento</string>
+    <string name="user_insertion_success">Usuário inserido com sucesso!</string>
+    <string name="search">Search here</string>
+    <string name="data">Data</string>
+    <string name="entidade">Entidade</string>
+    <string name="valor">Valor</string>
+    <string name="transacao">Transação</string>
 
     <string name="criar">Criar</string>
     <string name="registar">Registar</string>
