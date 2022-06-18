@@ -38,9 +38,11 @@
             android:name=".CreditRegistry"
             android:exported="false" />
         <activity
-            android:name=".CriarConta"
             android:name=".RecycleItem"
             android:exported="false" />
+        <activity
+            android:name=".CriarConta"
+            android:exported="false"/>
         <activity
             android:name=".SignUp"
             android:exported="false" />
