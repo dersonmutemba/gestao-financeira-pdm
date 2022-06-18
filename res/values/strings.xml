@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">Software de Gestão Financeira</string>
+    <string name="username_hint">Insira o seu nome</string>
+    <string name="password_hint">Insira a sua senha</string>
+    <string name="password_confirmation_hint">Confirme a sua senha</string>
+    <string name="email_hint">Insira o seu email</string>
+    <string name="account_name_hint">Insira o nome da conta</string>
+    <string name="associated_bank_hint">Insira o nome do banco</string>
+    <string name="account_amount_hint">Saldo da conta</string>
+    <string name="bank_associated_prompt">A conta está associada a um banco?</string>
+    <string name="go_back_button_text">&lt; Voltar</string>
+    <string name="no_account_prompt">Ainda não possui uma conta?</string>
+    <string name="wrong_email_or_password_error">Email ou senha incorrectos</string>
+    <string name="empty_field_error">Preencha todos os campos</string>
+    <string name="different_passwords_error">Senhas diferentes</string>
+    <string name="email_already_used_error">Email já foi usado, insira outro!</string>
+    <string name="user_insertion_success">Usuário inserido com sucesso!</string>
+    <string name="account_creation_success">Conta criada com sucesso!</string>
+    
+    <string name="insertion_error">Erro na inserção</string>
+
+    <string name="transaction_credit">Crédito</string>
+    <string name="transaction_debit">Débito</string>
+    <string name="fab_description">Adicionar Movimento</string>
+
+    <string name="criar">Criar</string>
+
+    <string name="pages_inicio">Início</string>
+    <string name="pages_historico">Histórico</string>
+    <string name="pages_menu">Menu</string>
+    <string name="pages_estatisticas">Estatísticas</string>
+    <string name="pages_definicoes">Definições</string>
+
+    <string name="last_account_id_key">lastAccountID</string>
+</resources>
