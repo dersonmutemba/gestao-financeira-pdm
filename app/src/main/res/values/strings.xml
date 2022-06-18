@@ -19,18 +19,20 @@
 
     <string name="go_back_button_text">Voltar</string>
     <string name="no_account_prompt">Ainda não possui uma conta?</string>
-    <string name="wrong_email_or_password_error">Email ou senha incorrectos</string>
-    <string name="empty_field_error">Preencha todos os campos</string>
-    <string name="different_passwords_error">Senhas diferentes</string>
-    <string name="email_already_used_error">Email já foi usado, insira outro!</string>
+
     <string name="user_insertion_success">Usuário inserido com sucesso!</string>
     <string name="account_creation_success">Conta criada com sucesso!</string>
     <string name="entity_creation_success">Entidade criada com sucesso</string>
+    <string name="movement_creation_success">Movimento registado com sucesso!</string>
     <string name="successful_update">Actualização feita com sucesso!</string>
     <string name="successful_deletion">Remoção feita com sucesso!</string>
 
     <string name="insertion_error">Erro na inserção</string>
     <string name="error">Erro!</string>
+    <string name="wrong_email_or_password_error">Email ou senha incorrectos</string>
+    <string name="empty_field_error">Preencha todos os campos</string>
+    <string name="different_passwords_error">Senhas diferentes</string>
+    <string name="email_already_used_error">Email já foi usado, insira outro!</string>
 
     <string name="transaction_credit">Crédito</string>
     <string name="transaction_debit">Débito</string>
@@ -57,6 +59,7 @@
 
     <string name="last_account_id_key">lastAccountID</string>
     <string name="last_entity_id_key">lastEntityID</string>
+    <string name="last_movement_id_key">lastMovementKey</string>
 
     <string-array name="debit_categories">
         <item>Serviços</item>

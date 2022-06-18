@@ -167,6 +167,12 @@ public class Database extends SQLiteOpenHelper {
                 CONTA_USUARIO + " = ?", usuarios);
     }
 
+    public Cursor getConta (long id) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        return sqLiteDatabase.rawQuery("SELECT * FROM " + CONTA_TABLE + " WHERE " +
+                CONTA_KEY + " = ?", new String[]{id + ""});
+    }
+
     public ArrayList<Conta> getContasArrayList (String[] usuarios) {
         Cursor cursor = getContas(usuarios);
         ArrayList<Conta> contas = new ArrayList<Conta>();
@@ -180,6 +186,20 @@ public class Database extends SQLiteOpenHelper {
             ));
         }
         return contas;
+    }
+
+    public Conta getObjectConta(long id) {
+        Cursor cursor = getConta(id);
+        if (cursor.getCount() <= 0)
+            return null;
+        cursor.moveToFirst();
+        return new Conta(
+                cursor.getLong(0),
+                cursor.getString(1),
+                cursor.getString(3),
+                cursor.getDouble(2),
+                cursor.getString(4)
+        );
     }
 
     public long insertEntidade(long id, String nome, String categoria, String usuario) {
@@ -277,7 +297,7 @@ public class Database extends SQLiteOpenHelper {
         contentValues.put(MOVIMENTO_TITULO, titulo);
         contentValues.put(MOVIMENTO_HORA, hora);
         contentValues.put(MOVIMENTO_ENTIDADE, entidade);
-        return sqLiteDatabase.insert(ENTIDADE_TABLE, null, contentValues);
+        return sqLiteDatabase.insert(MOVIMENTO_TABLE, null, contentValues);
     }
 
     public Cursor getMovimentosByTipo (String[] tipo) {
@@ -310,7 +330,7 @@ public class Database extends SQLiteOpenHelper {
     }
 
     public ArrayList<Movimento> getMovimentosByEntidadeArrayList (String[] entidade) {
-        Cursor cursor = getMovimentosByTipo(entidade);
+        Cursor cursor = getMovimentosByEntidade(entidade);
         ArrayList<Movimento> movimentos = new ArrayList<>();
         for(cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
             movimentos.add(new Movimento(

@@ -37,6 +37,11 @@ public class MainActivity extends AppCompatActivity {
         menu = new Menu();
         estatisticas = new Estatisticas();
         definicoes = new Definicoes();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation_view);
         bottomNavigationView.setOnItemSelectedListener(item -> {
