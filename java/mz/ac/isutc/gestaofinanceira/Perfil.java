@@ -5,30 +5,43 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 public class Perfil extends AppCompatActivity {
-
+    Usuario usuario;
     EditText oldPass, newPass;
-    EditText firstName, lastName;
+    EditText firstName;
+    Button btnGuardarDados;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+        Intent intent = getIntent();
+        usuario = (Usuario) intent.getSerializableExtra(DatabaseVariables.USUARIO_TABLE);
         Database db = new Database(getApplicationContext());
-        Cursor cursor = db.getUsuario(new String[]{});
+        Cursor cursor = db.getUsuario(new String[]{usuario.getEmail()});
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         firstName = findViewById(R.id.editMudarNome);
-        lastName = findViewById(R.id.editMudarApelido);
 
         for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
-            firstName.setText(Usuario);
+           firstName.setText(usuario.getNome());
         }
+
+        btnGuardarDados = findViewById(R.id.btLimparDados);
+        btnGuardarDados.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                vericaSenha();
+                atualizaNome(firstName.getText().toString());
+            }
+        });
 
     }
 
@@ -75,5 +88,12 @@ public class Perfil extends AppCompatActivity {
         }
         db.close();
         cursor.close();
+    }
+
+    private String atualizaNome(String newNome){
+
+        newNome = firstName.getText().toString();
+
+        return newNome;
     }
 }
