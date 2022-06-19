@@ -2,8 +2,8 @@ package mz.ac.isutc.gestaofinanceira;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.AdapterView;
@@ -14,6 +14,11 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -118,8 +123,7 @@ public class CreditRegistry extends AppCompatActivity {
                 spinnerAccount.getSelectedItemPosition() != 0 &&
                 !editTextAmount.getText().toString().equals("")) {
             Database database = new Database(getApplicationContext());
-            SharedPreferences preferences = getPreferences(MODE_MULTI_PROCESS);
-            long id = preferences.getLong(getString(R.string.last_movement_id_key), 1000);
+            long id = getLastMovimentoID();
             Calendar calendar = Calendar.getInstance();
             long result = database.insertMovimento(
                     ++id,
@@ -136,9 +140,7 @@ public class CreditRegistry extends AppCompatActivity {
                         R.string.movement_creation_success,
                         Toast.LENGTH_SHORT
                 ).show();
-                SharedPreferences.Editor editor = preferences.edit();
-                editor.putLong(getString(R.string.last_movement_id_key), id);
-                editor.apply();
+                writeLastMovimentoID(id);
                 Conta conta = database.getObjectConta(contasID[spinnerAccount.getSelectedItemPosition() - 1]);
                 conta.setAccountAmount(conta.getAccountAmount() +
                         Double.parseDouble(editTextAmount.getText().toString()));
@@ -159,6 +161,38 @@ public class CreditRegistry extends AppCompatActivity {
                     R.string.empty_field_error,
                     Toast.LENGTH_SHORT
             ).show();
+        }
+    }
+
+    public long getLastMovimentoID () {
+        File file = getFileStreamPath(getString(R.string.last_movement_id_key));
+        if(file.exists()) {
+            try{
+                FileInputStream fileInputStream = new FileInputStream(file);
+                ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+                long id = objectInputStream.readLong();
+                objectInputStream.close();
+                fileInputStream.close();
+                return id;
+            }
+            catch (Exception e) {
+                Log.e("IO Error", Log.getStackTraceString(e.fillInStackTrace()));
+            }
+        }
+        return 1000;
+    }
+
+    public void writeLastMovimentoID (long id) {
+        File file = getFileStreamPath(getString(R.string.last_movement_id_key));
+        try {
+            FileOutputStream fileOutputStream = new FileOutputStream(file);
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+            objectOutputStream.writeLong(id);
+            objectOutputStream.close();
+            fileOutputStream.close();
+        }
+        catch (Exception e) {
+            Log.e("IO Error", Log.getStackTraceString(e.fillInStackTrace()));
         }
     }
 }
