@@ -1,7 +1,5 @@
 package mz.ac.isutc.gestaofinanceira;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,6 +11,8 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -118,7 +118,7 @@ public class DebitRegistry extends AppCompatActivity {
                 spinnerAccount.getSelectedItemPosition() != 0 &&
                 !editTextAmount.getText().toString().equals("")) {
             Database database = new Database(getApplicationContext());
-            SharedPreferences preferences = getPreferences(MODE_PRIVATE);
+            SharedPreferences preferences = getPreferences(MODE_MULTI_PROCESS);
             long id = preferences.getLong(getString(R.string.last_movement_id_key), 1000);
             Calendar calendar = Calendar.getInstance();
             long result = database.insertMovimento(

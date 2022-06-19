@@ -1,7 +1,5 @@
 package mz.ac.isutc.gestaofinanceira;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -10,6 +8,8 @@ import android.view.ContextThemeWrapper;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.PopupMenu;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
@@ -33,10 +33,10 @@ public class MainActivity extends AppCompatActivity {
         usuario = (Usuario) intent.getSerializableExtra(DatabaseVariables.USUARIO_TABLE);
 
         inicio = Inicio.newInstance(usuario);
-        historico = new Historico();
+        historico = Historico.newInstance(usuario);
         menu = new Menu();
-        estatisticas = new Estatisticas();
-        definicoes = new Definicoes();
+        estatisticas = Estatisticas.newInstance(usuario);
+        definicoes = Definicoes.newInstance(usuario);
     }
 
     @Override
