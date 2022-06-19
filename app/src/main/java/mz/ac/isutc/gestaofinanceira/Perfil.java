@@ -1,5 +1,4 @@
 package mz.ac.isutc.gestaofinanceira;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -18,20 +17,25 @@ public class Perfil extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
         Intent intent = getIntent();
         usuario = (Usuario) intent.getSerializableExtra(DatabaseVariables.USUARIO_TABLE);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
         Database db = new Database(getApplicationContext());
         Cursor cursor = db.getUsuario(new String[]{usuario.getEmail()});
 
-        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         firstName = findViewById(R.id.editMudarNome);
 
         for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
-           firstName.setText(usuario.getNome());
+            firstName.setText(usuario.getNome());
         }
 
         btnGuardarDados = findViewById(R.id.btLimparDados);
@@ -42,7 +46,6 @@ public class Perfil extends AppCompatActivity {
                 atualizaNome(firstName.getText().toString());
             }
         });
-
     }
 
     private void vericaSenha(){
