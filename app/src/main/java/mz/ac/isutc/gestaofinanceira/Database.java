@@ -227,6 +227,21 @@ public class Database extends SQLiteOpenHelper {
                 ENTIDADE_KEY + " =?", new String[]{id + ""});
     }
 
+    public Entidade getEntidade (long id) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM " + ENTIDADE_TABLE + " WHERE " +
+                ENTIDADE_KEY + " = ?", new String[]{id + ""});
+        if(cursor.moveToFirst()) {
+            return new Entidade(
+                    cursor.getLong(0),
+                    cursor.getString(1),
+                    cursor.getString(2),
+                    cursor.getString(3)
+            );
+        }
+        return null;
+    }
+
     public Cursor getEntidadesByName (String[] name) {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         return sqLiteDatabase.rawQuery("SELECT * FROM " + ENTIDADE_TABLE + " WHERE " +
@@ -300,6 +315,11 @@ public class Database extends SQLiteOpenHelper {
         return sqLiteDatabase.insert(MOVIMENTO_TABLE, null, contentValues);
     }
 
+    public Cursor getMovimentos() {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        return sqLiteDatabase.rawQuery("SELECT * FROM " + MOVIMENTO_TABLE, null);
+    }
+
     public Cursor getMovimentosByTipo (String[] tipo) {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         return sqLiteDatabase.rawQuery("SELECT * FROM " + MOVIMENTO_TABLE + " WHERE " +
@@ -310,6 +330,23 @@ public class Database extends SQLiteOpenHelper {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         return sqLiteDatabase.rawQuery("SELECT * FROM " + MOVIMENTO_TABLE + " WHERE " +
                 MOVIMENTO_ENTIDADE + " =?", entidade);
+    }
+
+    public ArrayList<Movimento> getMovimentosArrayList() {
+        Cursor cursor = getMovimentos();
+        ArrayList<Movimento> movimentos = new ArrayList<>();
+        for(cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
+            movimentos.add(new Movimento(
+                    cursor.getLong(0),
+                    cursor.getString(1),
+                    cursor.getDouble(2),
+                    cursor.getString(3),
+                    cursor.getString(4),
+                    cursor.getString(5),
+                    cursor.getLong(6)
+            ));
+        }
+        return movimentos;
     }
 
     public ArrayList<Movimento> getMovimentosByTipoArrayList (String[] tipo) {

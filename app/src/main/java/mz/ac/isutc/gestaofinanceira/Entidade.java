@@ -4,9 +4,9 @@ import java.io.Serializable;
 
 public class Entidade implements Serializable {
 
-    long id;
-    String nome, categoria;
-    String usuario;
+    private long id;
+    private String nome, categoria;
+    private String usuario;
 
     public Entidade(long id, String nome, String categoria, String usuario) {
         this.id = id;

@@ -20,6 +20,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -125,14 +126,18 @@ public class DebitRegistry extends AppCompatActivity {
                 !editTextAmount.getText().toString().equals("")) {
             Database database = new Database(getApplicationContext());
             long id = getLastMovimentoID();
+            SimpleDateFormat simpleDateFormatDate = new SimpleDateFormat(Movimento.DATE_FORMAT);
+            SimpleDateFormat simpleDateFormatTime = new SimpleDateFormat(Movimento.TIME_FORMAT);
             Calendar calendar = Calendar.getInstance();
+            String date = simpleDateFormatDate.format(calendar.getTime());
+            String time = simpleDateFormatTime.format(calendar.getTime());
             long result = database.insertMovimento(
                     ++id,
                     getString(R.string.transaction_debit),
                     Double.parseDouble(editTextAmount.getText().toString()),
-                    calendar.toString(),
+                    date,
                     getString(R.string.transaction_debit) + " - " + spinnerEntity.getSelectedItem().toString(),
-                    calendar.get(Calendar.HOUR) + ":" + calendar.get(Calendar.MINUTE),
+                    time,
                     entidadesID[spinnerEntity.getSelectedItemPosition() - 1]
             );
             if(result != -1) {

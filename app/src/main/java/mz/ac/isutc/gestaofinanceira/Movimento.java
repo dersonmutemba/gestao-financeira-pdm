@@ -4,11 +4,14 @@ import java.io.Serializable;
 
 public class Movimento implements Serializable {
 
-    long id;
-    String tipo;
-    double valor;
-    String data, titulo, hora;
-    long entidade;
+    public static final String DATE_FORMAT = "dd/MM/yyyy", TIME_FORMAT = "HH:mm:ss";
+
+    private long id;
+    private String tipo;
+    private double valor;
+    private String data;
+    private String titulo, hora;
+    private long entidade;
 
     public Movimento(long id, String tipo, double valor, String data, String titulo, String hora, long entidade) {
         this.id = id;

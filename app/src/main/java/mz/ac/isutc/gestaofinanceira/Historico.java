@@ -120,9 +120,11 @@ public class Historico extends Fragment {
         List<Movimento> list = new ArrayList<>();
         Database database = new Database(getContext());
         List<Entidade> entidades = database.getEntidadesByUsuarioArrayList(new String[]{usuario.getEmail()});
-        for(Entidade entidade : entidades) {
-            ArrayList<Movimento> movimentos = database.getMovimentosByEntidadeArrayList(new String[]{entidade.getId() + ""});
-            for(Movimento movimento : movimentos) {
+        List<Movimento> movimentos = database.getMovimentosArrayList();
+        for(int i = movimentos.size() - 1; i >= 0; i--) {
+            Movimento movimento = movimentos.get(i);
+            Entidade entidade = database.getEntidade(movimento.getEntidade());
+            if(entidade != null && entidade.getUsuario().equals(usuario.getEmail())) {
                 list.add(movimento);
             }
         }
