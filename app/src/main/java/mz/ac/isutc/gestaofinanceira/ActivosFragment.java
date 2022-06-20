@@ -2,32 +2,33 @@ package mz.ac.isutc.gestaofinanceira;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.viewpager.widget.ViewPager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
-import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class Estatisticas extends Fragment {
-
-    private static final String ARG_USUARIO = "usuario";
-
-    private Usuario usuario;
+public class ActivosFragment extends Fragment {
 
     // variable for our bar chart
     BarChart barChart;
@@ -41,10 +42,14 @@ public class Estatisticas extends Fragment {
     // array list for storing entries.
     ArrayList barEntriesArrayList;
 
-    public static Estatisticas newInstance(Usuario usuario) {
-        Estatisticas fragment = new Estatisticas();
+    private static final String ARG_USUARIO = "usuario";
+
+    private Usuario usuario;
+
+    public static ActivosFragment newInstance(Usuario usuario) {
         Bundle args = new Bundle();
         args.putSerializable(ARG_USUARIO, usuario);
+        ActivosFragment fragment = new ActivosFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -62,20 +67,38 @@ public class Estatisticas extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        return inflater.inflate(R.layout.fragment_estatisticas, container, false);
+        return inflater.inflate(R.layout.fragment_activos, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        TabLayout tabLayout = getView().findViewById(R.id.tablayout);
-        ViewPager viewPager = getView().findViewById(R.id.viewPagerId);
-        tabLayout.setupWithViewPager(viewPager);
+        // initializing variable for bar chart.
+        barChart = getView().findViewById(R.id.idBarChart);
 
-        VPAdapter vpager = new VPAdapter(getParentFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
-        vpager.addFragment(ActivosFragment.newInstance(usuario), "Activos");
-        vpager.addFragment(PassivosFragment.newInstance(usuario), "Passivos");
-        viewPager.setAdapter(vpager);
+        // calling method to get bar entries.
+        getBarEntries();
+
+        // creating a new bar data set.
+        barDataSet = new BarDataSet(barEntriesArrayList, "Data analysis");
+
+        // creating a new bar data and
+        // passing our bar data set.
+        barData = new BarData(barDataSet);
+
+        // below line is to set data
+        // to our bar chart.
+        barChart.setData(barData);
+
+        // adding color to our bar data set.
+        barDataSet.setColors(ColorTemplate.MATERIAL_COLORS);
+
+        // setting text color.
+        barDataSet.setValueTextColor(Color.BLACK);
+
+        // setting text size
+        barDataSet.setValueTextSize(16f);
+        barChart.getDescription().setEnabled(false);
     }
 
     private void getBarEntries() {
@@ -84,11 +107,10 @@ public class Estatisticas extends Fragment {
 
         ArrayList data = getData();
         ArrayList types = new ArrayList();
-        types.add("Servicos");
-        types.add("Lazer");
-        types.add("Alimentacao");
-        types.add("Salario");
-        types.add("outros");
+        types.add("Loan");
+        types.add("Salary");
+        types.add("Others");
+        types.add("Rent");
         Movimento move ;
         double soma;
         String type, type2;
@@ -98,30 +120,36 @@ public class Estatisticas extends Fragment {
             type = (String) types.get(i);
             for(int j =0; j< data.size();j++){
                 move = (Movimento) data.get(j);
-                type2 = (String) types.get(i);
+                type2 = (String) move.getTipo();
                 if(type.equals(type2)){
                     soma += move.getValor();
                 }
             }
-            barEntriesArrayList.add(new BarEntry(i, (float) soma));
-
-
+            barEntriesArrayList.add(new BarEntry(i,(float) soma));
 
         }
 
+        XAxis xAxis = barChart.getXAxis();
+        xAxis.setGranularity(1f);
+        xAxis.setGranularityEnabled(true);
+        xAxis.setCenterAxisLabels(false);
+        xAxis.setTextSize(10f);
+        xAxis.setTextColor(Color.BLACK);
+        xAxis.setDrawGridLines(false);
+        xAxis.setAxisMaximum(6);
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxis.setValueFormatter(new IndexAxisValueFormatter(types));
 
-        // adding new entry to our array list with bar
-        // entry and passing x and y axis value to it.
-//        barEntriesArrayList.add(new BarEntry(1f, 4000));
-//        barEntriesArrayList.add(new BarEntry(2f, 600));
-//        barEntriesArrayList.add(new BarEntry(3f, 8999));
-//        barEntriesArrayList.add(new BarEntry(4f, 290));
-//        barEntriesArrayList.add(new BarEntry(5f, 420));
-//        barEntriesArrayList.add(new BarEntry(6f, 199));
+
+        Legend l = barChart.getLegend();
+        l.setXOffset(20f);
+        l.setStackSpace(5f);
+        l.setXEntrySpace(50f);
+
     }
 
-
     private ArrayList getData(){
+
         ArrayList<Movimento> list = new ArrayList<>();
         Database database = new Database(getContext());
         List<Entidade> entidades = database.getEntidadesByUsuarioArrayList(new String[]{usuario.getEmail()});
@@ -132,6 +160,7 @@ public class Estatisticas extends Fragment {
             }
         }
         return list;
-    }
 
+    }
 }
+
