@@ -16,4 +16,12 @@ public class SingleSubscricao extends AppCompatActivity {
     public void voltar(View view) {
         finish();
     }
+
+    public void remover(View view) {
+        finish();
+    }
+
+    public void guardar(View view) {
+        finish();
+    }
 }

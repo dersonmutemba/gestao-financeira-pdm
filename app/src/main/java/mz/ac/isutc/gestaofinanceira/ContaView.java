@@ -1,5 +1,7 @@
 package mz.ac.isutc.gestaofinanceira;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -11,6 +13,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import java.io.File;
 
 public class ContaView extends Fragment {
 
@@ -53,12 +57,14 @@ public class ContaView extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        File file = getActivity().getFileStreamPath(getString(R.string.currency_key));
+        String currency = Helper.getCurrency(file);
         TextView textViewAssociatedBank = getView().findViewById(R.id.associatedBank);
         TextView textViewAccountName = getView().findViewById(R.id.accountName);
         TextView textViewAccountAmount = getView().findViewById(R.id.accountAmount);
         textViewAssociatedBank.setText(conta.getAssociatedBank());
         textViewAccountName.setText(conta.getAccountName());
-        textViewAccountAmount.setText(conta.getAccountAmount() + " MT");
+        textViewAccountAmount.setText(conta.getAccountAmount() + " " + currency);
         if(conta.getAccountAmount() < 0) {
             textViewAccountAmount.setTextColor(Color.parseColor("#ED3A2D"));
         } else if(conta.getAccountAmount() > 0) {

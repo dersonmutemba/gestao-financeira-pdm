@@ -16,6 +16,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import java.io.File;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link Definicoes#newInstance} factory method to
@@ -97,7 +99,23 @@ public class Definicoes extends Fragment implements AdapterView.OnItemSelectedLi
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        Toast.makeText(getContext(), moedas[position],Toast.LENGTH_SHORT).show();
+        File file = getActivity().getFileStreamPath(getString(R.string.currency_key));
+        switch (position) {
+            case 0:
+                Helper.writeCurrency(file, "MT");
+                break;
+            case 1:
+                Helper.writeCurrency(file, "RND");
+                break;
+            case 2:
+                Helper.writeCurrency(file, "€");
+                break;
+            case 3:
+                Helper.writeCurrency(file, "$");
+                break;
+            default:
+                Helper.writeCurrency(file, "MT");
+        }
     }
 
     @Override

@@ -70,6 +70,8 @@
     <string name="last_movement_id_key">lastMovementKey</string>
     <string name="last_subscription_id_key">lastSubscriptionKey</string>
 
+    <string name="currency_key">currency</string>
+
     <string-array name="debit_categories">
         <item>Serviços</item>
         <item>Lazer</item>
