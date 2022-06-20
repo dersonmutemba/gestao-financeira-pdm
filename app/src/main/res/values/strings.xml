@@ -9,6 +9,9 @@
     <string name="account_amount_hint">Saldo da conta</string>
     <string name="amount_hint">Insira o valor</string>
     <string name="entity_hint">Insira o nome da entidade</string>
+    <string name="subscription_hint">Insira o nome da subscrição</string>
+
+    <string name="periodicity_seekbar">Escolha a periodicidade</string>
 
     <string name="account_spinner_tooltip">Selecione a conta</string>
     <string name="category_spinner_tooltip">Selecione a categoria da Entidade</string>
@@ -65,6 +68,7 @@
     <string name="last_account_id_key">lastAccountID</string>
     <string name="last_entity_id_key">lastEntityID</string>
     <string name="last_movement_id_key">lastMovementKey</string>
+    <string name="last_subscription_id_key">lastSubscriptionKey</string>
 
     <string-array name="debit_categories">
         <item>Serviços</item>
@@ -80,5 +84,12 @@
         <item>Empréstimo</item>
         <item>Salário</item>
         <item>Outros</item>
+    </string-array>
+
+    <string-array name="periodicidades">
+        <item>Diária</item>
+        <item>Semanal</item>
+        <item>Mensal</item>
+        <item>Anual</item>
     </string-array>
 </resources>

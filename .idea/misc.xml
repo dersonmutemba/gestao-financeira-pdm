@@ -38,6 +38,7 @@
         <entry key="app/src/main/res/layout/activity_credit_registry.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_criar_conta.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_criar_entidade.xml" value="0.2734319943622269" />
+        <entry key="app/src/main/res/layout/activity_criar_subscricao.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_debit_registry.xml" value="0.20208333333333334" />
         <entry key="app/src/main/res/layout/activity_entidade.xml" value="0.20208333333333334" />
         <entry key="app/src/main/res/layout/activity_entidades.xml" value="0.20208333333333334" />
@@ -48,6 +49,7 @@
         <entry key="app/src/main/res/layout/activity_perfil.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_recycle_item.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_single_subscricao.xml" value="0.17119565217391305" />
         <entry key="app/src/main/res/layout/activity_subscricoes.xml" value="0.1875" />
         <entry key="app/src/main/res/layout/conta.xml" value="0.20208333333333334" />
         <entry key="app/src/main/res/layout/curso.xml" value="0.2" />
@@ -66,6 +68,7 @@
         <entry key="app/src/main/res/layout/sample_account_card.xml" value="0.25" />
         <entry key="app/src/main/res/layout/sample_accounts__view.xml" value="0.17617753623188406" />
         <entry key="app/src/main/res/layout/sample_accounts_view.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/subscricao.xml" value="0.17119565217391305" />
         <entry key="app/src/main/res/menu/menu.xml" value="0.20104166666666667" />
         <entry key="app/src/main/res/menu/transaction_menu.xml" value="0.20104166666666667" />
       </map>

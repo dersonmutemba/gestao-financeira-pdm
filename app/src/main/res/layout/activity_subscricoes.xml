@@ -40,7 +40,8 @@
             android:text="@string/add_subscription"
             android:textSize="16dp"
             android:textStyle="bold"
-            android:drawableLeft="@drawable/ic_baseline_add_24"/>
+            android:drawableLeft="@drawable/ic_baseline_add_24"
+            android:onClick="goToCriarSubscricao"/>
 
         <ListView
             android:layout_width="match_parent"

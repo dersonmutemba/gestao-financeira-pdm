@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CriarEntidade">
+    tools:context=".CriarSubscricao">
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -35,46 +36,69 @@
             android:layout_height="50dp"
             android:layout_marginVertical="10dp"
             android:layout_marginHorizontal="20dp"
-            android:hint="@string/entity_hint"
+            android:hint="@string/subscription_hint"
             android:inputType="textCapSentences"
-            android:id="@+id/entityEditText"/>
-
-        <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:text="@string/category_prompt"
-            android:checked="true"
-            style="@style/Widget.Material3.CompoundButton.CheckBox"
-            android:textSize="13sp"
-            android:id="@+id/checkBoxCategoryPrompt"/>
-
-        <RadioGroup
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:id="@+id/radioGroup">
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                android:text="@string/transaction_credit"
-                android:checked="true"
-                android:id="@+id/radioButtonCredit"/>
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                android:text="@string/transaction_debit"
-                android:id="@+id/radioButtonDebit"/>
-        </RadioGroup>
+            android:id="@+id/subscriptionEditText"/>
 
         <Spinner
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginHorizontal="60dp"
             android:layout_marginBottom="40dp"
-            android:id="@+id/spinnerCategory"/>
+            android:id="@+id/subscriptionEntityList"/>
+
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/subscriptionRadioGroup">
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:text="@string/transaction_credit"
+                android:checked="true"
+                android:id="@+id/subscriptionRadioButtonCredit"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:text="@string/transaction_debit"
+                android:id="@+id/subscriptionRadioButtonDebit"/>
+        </RadioGroup>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/periodicity_seekbar"
+                app:layout_constraintStart_toStartOf="parent"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:id="@+id/periodicity_label"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <SeekBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp"
+            android:layout_marginHorizontal="20dp"
+            android:progress="3"
+            android:max="3"
+            android:id="@+id/periodicity_seekbar"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginVertical="10dp"
+            android:layout_marginHorizontal="20dp"
+            android:hint="@string/amount_hint"
+            android:inputType="numberDecimal"
+            android:id="@+id/subscriptionEditTextAmount"/>
 
         <Button
             android:layout_width="wrap_content"
@@ -84,9 +108,8 @@
             android:textSize="18sp"
             android:paddingHorizontal="40dp"
             android:paddingVertical="10dp"
-            android:onClick="criarEntidade"/>
+            android:onClick="criarSubscricao"/>
 
     </LinearLayout>
 
 </RelativeLayout>
-

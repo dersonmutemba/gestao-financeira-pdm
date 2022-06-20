@@ -53,12 +53,15 @@ public class RecyclerAdapter  extends RecyclerView.Adapter<ViewHoldermod> {
     public void
     onBindViewHolder(final ViewHoldermod viewHoldermod, final int position) {
         final int index = viewHoldermod.getAdapterPosition();
+        Database database = new Database(context.getApplicationContext());
+        Entidade entidade = database.getEntidade(list.get(position).getEntidade());
+        database.close();
         viewHoldermod.textViewTitle
                 .setText(list.get(position).getTitulo());
         viewHoldermod.textViewDate
                 .setText(list.get(position).getData());
         viewHoldermod.textViewEntity
-                .setText(String.valueOf(list.get(position).getEntidade()));
+                .setText(entidade != null ? entidade.getNome() : "Entidade não existente");
         viewHoldermod.textViewTransaction
                 .setText(list.get(position).getTipo());
         viewHoldermod.textViewAmount

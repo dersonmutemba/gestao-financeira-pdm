@@ -128,6 +128,7 @@ public class Historico extends Fragment {
                 list.add(movimento);
             }
         }
+        database.close();
         return list;
     }
 

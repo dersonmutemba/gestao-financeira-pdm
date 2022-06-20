@@ -125,7 +125,8 @@ public class DebitRegistry extends AppCompatActivity {
                 spinnerAccount.getSelectedItemPosition() != 0 &&
                 !editTextAmount.getText().toString().equals("")) {
             Database database = new Database(getApplicationContext());
-            long id = getLastMovimentoID();
+            File file = getFileStreamPath(getString(R.string.last_movement_id_key));
+            long id = Helper.getLastMovimentoID(file);
             SimpleDateFormat simpleDateFormatDate = new SimpleDateFormat(Movimento.DATE_FORMAT);
             SimpleDateFormat simpleDateFormatTime = new SimpleDateFormat(Movimento.TIME_FORMAT);
             Calendar calendar = Calendar.getInstance();
@@ -146,7 +147,7 @@ public class DebitRegistry extends AppCompatActivity {
                         R.string.movement_creation_success,
                         Toast.LENGTH_SHORT
                 ).show();
-                writeLastMovimentoID(id);
+                Helper.writeLastMovimentoID(file, id);
                 Conta conta = database.getObjectConta(contasID[spinnerAccount.getSelectedItemPosition() - 1]);
                 conta.setAccountAmount(conta.getAccountAmount() -
                         Double.parseDouble(editTextAmount.getText().toString()));
@@ -167,38 +168,6 @@ public class DebitRegistry extends AppCompatActivity {
                     R.string.empty_field_error,
                     Toast.LENGTH_SHORT
             ).show();
-        }
-    }
-
-    public long getLastMovimentoID () {
-        File file = getFileStreamPath(getString(R.string.last_movement_id_key));
-        if(file.exists()) {
-            try{
-                FileInputStream fileInputStream = new FileInputStream(file);
-                ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-                long id = objectInputStream.readLong();
-                objectInputStream.close();
-                fileInputStream.close();
-                return id;
-            }
-            catch (Exception e) {
-                Log.e("IO Error", Log.getStackTraceString(e.fillInStackTrace()));
-            }
-        }
-        return 1000;
-    }
-
-    public void writeLastMovimentoID (long id) {
-        File file = getFileStreamPath(getString(R.string.last_movement_id_key));
-        try {
-            FileOutputStream fileOutputStream = new FileOutputStream(file);
-            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
-            objectOutputStream.writeLong(id);
-            objectOutputStream.close();
-            fileOutputStream.close();
-        }
-        catch (Exception e) {
-            Log.e("IO Error", Log.getStackTraceString(e.fillInStackTrace()));
         }
     }
 }

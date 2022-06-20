@@ -32,4 +32,13 @@ public class DatabaseVariables {
                         MOVIMENTO_HORA = "hora",
                         MOVIMENTO_ENTIDADE = "entidade";
 
+    public static final String SUBSCRICAO_TABLE = "subscricao",
+                        SUBSCRICAO_KEY = "id",
+                        SUBSCRICAO_NOME = "nome",
+                        SUBSCRICAO_DATA = "data",
+                        SUBSCRICAO_PERIODICIDADE = "periodicidade",
+                        SUBSCRICAO_VALOR = "valor",
+                        SUBSCRICAO_TIPO = "tipo",
+                        SUBSCRICAO_ENTIDADE = "entidade";
+
 }

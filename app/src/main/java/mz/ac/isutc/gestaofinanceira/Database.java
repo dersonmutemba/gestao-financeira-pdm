@@ -21,6 +21,14 @@ import static mz.ac.isutc.gestaofinanceira.DatabaseVariables.MOVIMENTO_TABLE;
 import static mz.ac.isutc.gestaofinanceira.DatabaseVariables.MOVIMENTO_TIPO;
 import static mz.ac.isutc.gestaofinanceira.DatabaseVariables.MOVIMENTO_TITULO;
 import static mz.ac.isutc.gestaofinanceira.DatabaseVariables.MOVIMENTO_VALOR;
+import static mz.ac.isutc.gestaofinanceira.DatabaseVariables.SUBSCRICAO_DATA;
+import static mz.ac.isutc.gestaofinanceira.DatabaseVariables.SUBSCRICAO_ENTIDADE;
+import static mz.ac.isutc.gestaofinanceira.DatabaseVariables.SUBSCRICAO_KEY;
+import static mz.ac.isutc.gestaofinanceira.DatabaseVariables.SUBSCRICAO_NOME;
+import static mz.ac.isutc.gestaofinanceira.DatabaseVariables.SUBSCRICAO_PERIODICIDADE;
+import static mz.ac.isutc.gestaofinanceira.DatabaseVariables.SUBSCRICAO_TABLE;
+import static mz.ac.isutc.gestaofinanceira.DatabaseVariables.SUBSCRICAO_TIPO;
+import static mz.ac.isutc.gestaofinanceira.DatabaseVariables.SUBSCRICAO_VALOR;
 import static mz.ac.isutc.gestaofinanceira.DatabaseVariables.USUARIO_KEY;
 import static mz.ac.isutc.gestaofinanceira.DatabaseVariables.USUARIO_NOME;
 import static mz.ac.isutc.gestaofinanceira.DatabaseVariables.USUARIO_SENHA;
@@ -73,6 +81,16 @@ public class Database extends SQLiteOpenHelper {
                 MOVIMENTO_ENTIDADE + " NUMBER NOT NULL," +
                 " FOREIGN KEY (" + MOVIMENTO_ENTIDADE + ")" +
                 " REFERENCES " + ENTIDADE_TABLE + "(" + ENTIDADE_KEY + ")" + ")");
+        db.execSQL("CREATE TABLE " + SUBSCRICAO_TABLE + "(" +
+                SUBSCRICAO_KEY + " NUMBER PRIMARY KEY," +
+                SUBSCRICAO_NOME + " TEXT NOT NULL," +
+                SUBSCRICAO_DATA + " TEXT NOT NULL," +
+                SUBSCRICAO_PERIODICIDADE + " TEXT NOT NULL," +
+                SUBSCRICAO_VALOR + " NUMBER NOT NULL," +
+                SUBSCRICAO_TIPO + " TEXT NOT NULL," +
+                SUBSCRICAO_ENTIDADE + " NUMBER NOT NULL," +
+                " FOREIGN KEY (" + SUBSCRICAO_ENTIDADE + ")" +
+                "REFERENCES " + ENTIDADE_TABLE + "(" + ENTIDADE_KEY +")" + ")");
     }
 
     @Override
@@ -271,6 +289,7 @@ public class Database extends SQLiteOpenHelper {
                     cursor.getString(3)
             ));
         }
+        cursor.close();
         return entidades;
     }
 
@@ -285,6 +304,7 @@ public class Database extends SQLiteOpenHelper {
                     cursor.getString(3)
             ));
         }
+        cursor.close();
         return entidades;
     }
 
@@ -299,6 +319,7 @@ public class Database extends SQLiteOpenHelper {
                     cursor.getString(3)
             ));
         }
+        cursor.close();
         return entidades;
     }
 
@@ -346,6 +367,7 @@ public class Database extends SQLiteOpenHelper {
                     cursor.getLong(6)
             ));
         }
+        cursor.close();
         return movimentos;
     }
 
@@ -363,6 +385,7 @@ public class Database extends SQLiteOpenHelper {
                     cursor.getLong(6)
             ));
         }
+        cursor.close();
         return movimentos;
     }
 
@@ -380,7 +403,67 @@ public class Database extends SQLiteOpenHelper {
                     cursor.getLong(6)
             ));
         }
+        cursor.close();
         return movimentos;
     }
 
+    public long insertSubscricao(long id, String nome, String dataDeRegisto, String periodicidade, double valor, String tipo, long entidade) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(SUBSCRICAO_KEY, id);
+        contentValues.put(SUBSCRICAO_NOME, nome);
+        contentValues.put(SUBSCRICAO_DATA, dataDeRegisto);
+        contentValues.put(SUBSCRICAO_PERIODICIDADE, periodicidade);
+        contentValues.put(SUBSCRICAO_VALOR, valor);
+        contentValues.put(SUBSCRICAO_TIPO, tipo);
+        contentValues.put(SUBSCRICAO_ENTIDADE, entidade);
+        return sqLiteDatabase.insert(SUBSCRICAO_TABLE, null, contentValues);
+    }
+
+    public Cursor getSubscricoes () {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        return sqLiteDatabase.rawQuery("SELECT * FROM " + SUBSCRICAO_TABLE, null);
+    }
+
+    public ArrayList<Subscricao> getSubscricoesArrayList() {
+        Cursor cursor = getSubscricoes();
+        ArrayList<Subscricao> subscricoes = new ArrayList<>();
+        for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
+            subscricoes.add(new Subscricao(
+                    cursor.getLong(0),
+                    cursor.getString(1),
+                    cursor.getString(2),
+                    cursor.getString(3),
+                    cursor.getDouble(4),
+                    cursor.getString(5),
+                    cursor.getLong(6)
+            ));
+        }
+        cursor.close();
+        return subscricoes;
+    }
+
+    public Cursor getSubscricoesByEntidade(long entidade) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        return sqLiteDatabase.rawQuery("SELECT * FROM " + SUBSCRICAO_TABLE +
+                " WHERE " + SUBSCRICAO_ENTIDADE + " = ?", new String[]{entidade + ""});
+    }
+
+    public ArrayList<Subscricao> getSubscricoesByEntidadeArrayList(long entidade) {
+        Cursor cursor = getSubscricoesByEntidade(entidade);
+        ArrayList<Subscricao> subscricoes = new ArrayList<>();
+        for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
+            subscricoes.add(new Subscricao(
+                    cursor.getLong(0),
+                    cursor.getString(1),
+                    cursor.getString(2),
+                    cursor.getString(3),
+                    cursor.getDouble(4),
+                    cursor.getString(5),
+                    cursor.getLong(6)
+            ));
+        }
+        cursor.close();
+        return subscricoes;
+    }
 }
