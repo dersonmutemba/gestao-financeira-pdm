@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".Inicio">
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/mancha_superior"
+        android:scaleType="fitXY"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,8 +21,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textFontWeight="900"
+            android:textSize="20sp"
             android:layout_margin="10dp"
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/textNameInicio"
             android:text="@string/pages_inicio"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textFontWeight="700"
+            android:textSize="16sp"
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/textDateInicio"
+            android:text="01/01/2000"/>
 
         <androidx.viewpager.widget.ViewPager
             android:layout_width="match_parent"
@@ -25,4 +43,27 @@
 
     </LinearLayout>
 
-</FrameLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|bottom"
+            android:layout_margin="16dp"
+            android:src="@drawable/ic_baseline_add_24"
+            android:elevation="10px"
+            app:tint="@color/white"
+            android:contentDescription="@string/fab_description"
+            android:text="@string/fab_description"
+            app:icon="@drawable/ic_baseline_add_24"
+            android:textColor="@color/white"
+            app:iconTint="@color/white"
+
+            android:onClick="showMenu"
+            android:id="@+id/inicioFAB">
+
+        </com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton>
+    </FrameLayout>
+
+</RelativeLayout>

@@ -4,13 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AdicionarConta">
+    tools:context=".MainActivity">
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_margin="30dp"
-        android:elevation="3dp"
         app:cardCornerRadius="20dp"
         android:onClick="goToCriarConta"
         android:focusable="true"
@@ -21,7 +20,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:gravity="center"
-            android:background="@drawable/card_gradient">
+            android:background="@drawable/add_card_gradient">
 
             <ImageView
                 android:layout_width="60dp"

@@ -25,6 +25,7 @@ import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class ActivosFragment extends Fragment {
@@ -41,6 +42,25 @@ public class ActivosFragment extends Fragment {
     // array list for storing entries.
     ArrayList barEntriesArrayList;
 
+    private static final String ARG_USUARIO = "usuario";
+
+    private Usuario usuario;
+
+    public static ActivosFragment newInstance(Usuario usuario) {
+        Bundle args = new Bundle();
+        args.putSerializable(ARG_USUARIO, usuario);
+        ActivosFragment fragment = new ActivosFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            usuario = (Usuario) getArguments().getSerializable(ARG_USUARIO);
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -108,3 +128,67 @@ public class ActivosFragment extends Fragment {
 
     }
 }
+        ArrayList data = getData();
+        ArrayList types = new ArrayList();
+        types.add("Serviços");
+        types.add("Lazer");
+        types.add("Transporte");
+        types.add("Comunicação");
+        types.add("Alimentação");
+        Movimento move ;
+        double soma;
+        String type, type2;
+
+        for(int i = 0;i< types.size();i++){
+            soma = 0;
+            type = (String) types.get(i);
+            for(int j =0; j< data.size();j++){
+                move = (Movimento) data.get(j);
+                Database database = new Database(getContext());
+                Entidade entidade = database.getEntidade(move.getEntidade());
+                if(entidade != null) {
+                    type2 = (String) entidade.getCategoria();
+                    if(type.equals(type2)){
+                        soma += move.getValor();
+                    }
+                }
+            }
+            barEntriesArrayList.add(new BarEntry(i,(float) soma));
+
+        }
+
+        XAxis xAxis = barChart.getXAxis();
+        xAxis.setGranularity(1f);
+        xAxis.setGranularityEnabled(true);
+        xAxis.setCenterAxisLabels(false);
+        xAxis.setTextSize(10f);
+        xAxis.setTextColor(Color.BLACK);
+        xAxis.setDrawGridLines(false);
+        xAxis.setAxisMaximum(6);
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxis.setValueFormatter(new IndexAxisValueFormatter(types));
+
+
+        Legend l = barChart.getLegend();
+        l.setXOffset(20f);
+        l.setStackSpace(5f);
+        l.setXEntrySpace(50f);
+
+    }
+
+    private ArrayList getData(){
+
+        ArrayList<Movimento> list = new ArrayList<>();
+        Database database = new Database(getContext());
+        List<Entidade> entidades = database.getEntidadesByUsuarioArrayList(new String[]{usuario.getEmail()});
+        for(Entidade entidade : entidades) {
+            ArrayList<Movimento> movimentos = database.getMovimentosByEntidadeArrayList(new String[]{entidade.getId() + ""});
+            for(Movimento movimento : movimentos) {
+                list.add(movimento);
+            }
+        }
+        return list;
+
+    }
+}
+

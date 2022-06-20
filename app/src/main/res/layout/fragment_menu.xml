@@ -3,14 +3,63 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Menu">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".MainActivity">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textFontWeight="900"
-        android:layout_margin="10dp"
-        android:text="@string/pages_menu"/>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:padding="30dp"
+                    android:textColor="@color/colorPrimaryVariant"
+                    android:backgroundTint="@color/colorSecondaryVariant"
+                    style="@style/Widget.Material3.Button.ElevatedButton"
+                    android:text="@string/menu_entidade"
+                    android:onClick="entidades"/>
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:padding="20dp"
+                    android:textColor="@color/colorPrimaryVariant"
+                    android:backgroundTint="@color/colorSecondaryVariant"
+                    android:layout_marginHorizontal="10dp"
+                    style="@style/Widget.Material3.Button.ElevatedButton"
+                    android:text="@string/menu_subscriptions"
+                    android:onClick="subscricoes"/>
+            </LinearLayout>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:padding="40dp"
+                android:textColor="@color/colorPrimaryVariant"
+                android:backgroundTint="@color/colorSecondaryVariant"
+                style="@style/Widget.Material3.Button.ElevatedButton"
+                android:text="@string/menu_contas"
+                android:onClick="contas"/>
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

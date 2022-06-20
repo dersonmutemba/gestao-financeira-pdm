@@ -10,7 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_margin="30dp"
-        android:elevation="3dp"
         app:cardCornerRadius="20dp"
         android:focusable="true"
         android:clickable="true">
@@ -42,7 +41,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/accountAmount"
                 android:textColor="@color/white"
-                android:textFontWeight="300"
+                android:textFontWeight="600"
                 android:textSize="24sp"/>
 
         </LinearLayout>

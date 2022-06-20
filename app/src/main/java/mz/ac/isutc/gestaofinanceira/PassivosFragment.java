@@ -25,6 +25,7 @@ import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class PassivosFragment extends Fragment {
@@ -41,6 +42,25 @@ public class PassivosFragment extends Fragment {
     // array list for storing entries.
     ArrayList barEntriesArrayList;
 
+    private static final String ARG_USUARIO = "usuario";
+
+    private Usuario usuario;
+
+    public static PassivosFragment newInstance(Usuario usuario) {
+        Bundle args = new Bundle();
+        args.putSerializable(ARG_USUARIO, usuario);
+        PassivosFragment fragment = new PassivosFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            usuario = (Usuario) getArguments().getSerializable(ARG_USUARIO);
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -93,6 +113,10 @@ public class PassivosFragment extends Fragment {
         types.add("Emprestimo");
         types.add("outros");
         move move ;
+        types.add("Venda");
+        types.add("Empréstimo");
+        types.add("Salário");
+        Movimento move ;
         double soma;
         String type, type2;
 
@@ -104,6 +128,14 @@ public class PassivosFragment extends Fragment {
                 type2 = (String) move.getType();
                 if(type.equals(type2)){
                     soma += move.getValor();
+                move = (Movimento) data.get(j);
+                Database database = new Database(getContext());
+                Entidade entidade = database.getEntidade(move.getEntidade());
+                if(entidade != null) {
+                    type2 = (String) entidade.getCategoria();
+                    if(type.equals(type2)){
+                        soma += move.getValor();
+                    }
                 }
             }
             barEntriesArrayList.add(new BarEntry(i,(float) soma));
@@ -119,6 +151,11 @@ public class PassivosFragment extends Fragment {
         xAxis.setDrawGridLines(false);
         xAxis.setAxisMaximum(6);
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM_INSIDE);
+        xAxis.setTextSize(10f);
+        xAxis.setTextColor(Color.BLACK);
+        xAxis.setDrawGridLines(false);
+        xAxis.setAxisMaximum(6);
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setValueFormatter(new IndexAxisValueFormatter(types));
 
 
@@ -136,6 +173,13 @@ public class PassivosFragment extends Fragment {
 //        barEntriesArrayList.add(new BarEntry(4f, 290));
 //        barEntriesArrayList.add(new BarEntry(5f, 420));
 //        barEntriesArrayList.add(new BarEntry(6f, 199));
+//        barEntriesArrayList.add(new BarEntry(1f, 4));
+//        barEntriesArrayList.add(new BarEntry(2f, 6));
+//        barEntriesArrayList.add(new BarEntry(3f, 8));
+//        barEntriesArrayList.add(new BarEntry(4f, 2));
+//        barEntriesArrayList.add(new BarEntry(5f, 4));
+//        barEntriesArrayList.add(new BarEntry(6f, 1));
+
     }
 
 
@@ -154,6 +198,16 @@ public class PassivosFragment extends Fragment {
         moves.add(new move(124,"Servicos"));
         ;
         return moves;
+        ArrayList<Movimento> list = new ArrayList<>();
+        Database database = new Database(getContext());
+        List<Entidade> entidades = database.getEntidadesByUsuarioArrayList(new String[]{usuario.getEmail()});
+        for(Entidade entidade : entidades) {
+            ArrayList<Movimento> movimentos = database.getMovimentosByEntidadeArrayList(new String[]{entidade.getId() + ""});
+            for(Movimento movimento : movimentos) {
+                list.add(movimento);
+            }
+        }
+        return list;
 
     }
 }

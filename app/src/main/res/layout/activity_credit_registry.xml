@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CreditRegistry">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:scaleX="1.8"
+        android:scaleY="1.8"
+        android:src="@drawable/backgroud_image"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:text="@string/go_back_button_text"
+        android:drawableLeft="@drawable/ic_baseline_arrow_back_ios_24"
+        android:drawableTint="@color/primaryColor"
+        android:textFontWeight="900"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:onClick="voltar"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_margin="20dp"
+            android:tooltipText="@string/account_spinner_tooltip"
+            android:id="@+id/creditSpinnerAccount"/>
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_margin="20dp"
+            android:tooltipText="@string/category_spinner_tooltip"
+            android:id="@+id/creditSpinnerCategory"/>
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_margin="20dp"
+            android:tooltipText="@string/entity_spinner_tooltip"
+            android:id="@+id/creditSpinnerEntity"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="20dp"
+            android:hint="@string/amount_hint"
+            android:id="@+id/creditEditTextAmount"
+            android:gravity="center"
+            android:inputType="numberDecimal"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Widget.Material3.Button.ElevatedButton"
+            android:text="@string/registar"
+            android:textSize="18sp"
+            android:paddingHorizontal="40dp"
+            android:paddingVertical="10dp"
+            android:onClick="registar"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

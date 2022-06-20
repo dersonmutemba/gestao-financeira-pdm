@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -19,21 +20,21 @@ import java.util.Locale;
 
 public class RecyclerAdapter  extends RecyclerView.Adapter<ViewHoldermod> {
 
-    List<Transaction> list = Collections.emptyList();
-    List<Transaction> exampleListFull;
+    List<Movimento> list = Collections.emptyList();
+    List<Movimento> exampleListFull;
 
     Context context;
 
     ClickListiner listiner;
 
-    public RecyclerAdapter(List<Transaction> list, Context context, ClickListiner listiner) {
+    public RecyclerAdapter(List<Movimento> list, Context context, ClickListiner listiner) {
         this.list = list;
         this.exampleListFull = new ArrayList<>(list);
         this.context = context;
         this.listiner = listiner;
     }
 
-    public RecyclerAdapter(Context context, List<Transaction> list) {
+    public RecyclerAdapter(Context context, List<Movimento> list) {
     }
 
     @NonNull
@@ -52,16 +53,19 @@ public class RecyclerAdapter  extends RecyclerView.Adapter<ViewHoldermod> {
     public void
     onBindViewHolder(final ViewHoldermod viewHoldermod, final int position) {
         final int index = viewHoldermod.getAdapterPosition();
+        Database database = new Database(context.getApplicationContext());
+        Entidade entidade = database.getEntidade(list.get(position).getEntidade());
+        database.close();
         viewHoldermod.textViewTitle
-                .setText(list.get(position).getTitle());
+                .setText(list.get(position).getTitulo());
         viewHoldermod.textViewDate
-                .setText(list.get(position).getDateTime());
+                .setText(list.get(position).getData());
         viewHoldermod.textViewEntity
-                .setText(String.valueOf(list.get(position).getEntidade()));
+                .setText(entidade != null ? entidade.getNome() : "Entidade não existente");
         viewHoldermod.textViewTransaction
-                .setText(list.get(position).getType());
+                .setText(list.get(position).getTipo());
         viewHoldermod.textViewAmount
-                .setText(String.valueOf(list.get(position).getAmount()));
+                .setText(String.valueOf(list.get(position).getValor()));
         viewHoldermod.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -81,7 +85,7 @@ public class RecyclerAdapter  extends RecyclerView.Adapter<ViewHoldermod> {
     }
 
 
-    public void filteredList(List<Transaction> filteredlist) {
+    public void filteredList(List<Movimento> filteredlist) {
         list = filteredlist;
         notifyDataSetChanged();
     }

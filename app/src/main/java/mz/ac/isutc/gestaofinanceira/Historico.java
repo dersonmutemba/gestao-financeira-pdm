@@ -1,13 +1,6 @@
 package mz.ac.isutc.gestaofinanceira;
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -15,25 +8,46 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
 
-
 public class Historico extends Fragment {
+
+    private static final String ARG_USUARIO = "usuario";
+
+    private Usuario usuario;
 
     RecyclerAdapter adapter;
     RecyclerView recyclerView;
     ClickListiner listiner;
     EditText search;
 
-    List<Transaction> list = new ArrayList<Transaction>();
-    List<Transaction> filteredlist = new ArrayList<Transaction>();
+    List<Movimento> list = new ArrayList<Movimento>();
+    List<Movimento> filteredlist = new ArrayList<Movimento>();
+
+    public static Historico newInstance(Usuario usuario) {
+        Historico fragment = new Historico();
+        Bundle args = new Bundle();
+        args.putSerializable(ARG_USUARIO, usuario);
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            usuario = (Usuario) getArguments().getSerializable(ARG_USUARIO);
+        }
     }
 
     @Override
@@ -93,22 +107,28 @@ public class Historico extends Fragment {
 
     private void Filter(String text) {
 
-        for (Transaction transaction : list) {
-            if (transaction.getTitle().toLowerCase().contains(text.toLowerCase())) {
-                filteredlist.add(transaction);
+        for (Movimento movimento : list) {
+            if (movimento.getTitulo().toLowerCase().contains(text.toLowerCase())) {
+                filteredlist.add(movimento);
             }
         }
         adapter.filteredList(filteredlist);
 
     }
 
-    private List<Transaction> getData() {
-        List<Transaction> list = new ArrayList<>();
-        list.add(new Transaction("Pagamento Mensalidade",getTodaysDate(), 82001, "Debito",10950));
-        list.add(new Transaction("Pagamento Wifi",getTodaysDate(), 80001, "Debito",5000));
-        list.add(new Transaction("Pagamento Água",getTodaysDate(), 5000, "Debito",2000));
-        list.add(new Transaction("Pagamento Wallets",getTodaysDate(), 80001, "Debito",000));
-        list.add(new Transaction("Pagamento Waves",getTodaysDate(), 8001, "Credito",5000));
+    private List<Movimento> getData() {
+        List<Movimento> list = new ArrayList<>();
+        Database database = new Database(getContext());
+        List<Entidade> entidades = database.getEntidadesByUsuarioArrayList(new String[]{usuario.getEmail()});
+        List<Movimento> movimentos = database.getMovimentosArrayList();
+        for(int i = movimentos.size() - 1; i >= 0; i--) {
+            Movimento movimento = movimentos.get(i);
+            Entidade entidade = database.getEntidade(movimento.getEntidade());
+            if(entidade != null && entidade.getUsuario().equals(usuario.getEmail())) {
+                list.add(movimento);
+            }
+        }
+        database.close();
         return list;
     }
 

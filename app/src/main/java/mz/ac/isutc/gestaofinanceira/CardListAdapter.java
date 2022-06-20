@@ -7,34 +7,33 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
+import java.util.ArrayList;
+
 public class CardListAdapter extends FragmentPagerAdapter {
 
     private Context context;
-    private int totalTabs;
+    private ArrayList<ContaView> contas;
 
-    public CardListAdapter(Context context, @NonNull FragmentManager fm, int totalTabs) {
+    private long baseId = 0;
+
+    public CardListAdapter(Context context, @NonNull FragmentManager fm, ArrayList<ContaView> contas) {
         super(fm);
         this.context = context;
-        this.totalTabs = totalTabs;
+        this.contas = contas;
     }
 
     @NonNull
     @Override
     public Fragment getItem(int position) {
-        switch (position) {
-            case 0:
-                return new AdicionarConta();
-            case 1:
-                return ContaView.newInstance("Conta Geral", 0, "");
-            case 2:
-                return ContaView.newInstance("Salário", 1000, "Millenium BIM");
-            default:
-                return null;
+        for(int i = 0; i < contas.size(); i++) {
+            if(contas.size() - position - 1 == i)
+                return contas.get(i);
         }
+        return new AdicionarConta();
     }
 
     @Override
     public int getCount() {
-        return totalTabs;
+        return contas.size() + 1;
     }
 }

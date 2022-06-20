@@ -17,6 +17,10 @@
 
     <item name="colorPrimary" type="color">#273687</item>
     <item name="backgroud_image" type="drawable">@drawable/background_light</item>
-    <item name="card_gradient" type="drawable">@drawable/light_card_gradient</item>
-    <item name="add_icon_gradient" type="drawable">@drawable/dark_card_gradient</item>
+    <item name="mancha_superior" type="drawable">@drawable/light_mancha_superior</item>
+    <item name="add_card_gradient" type="drawable">@drawable/light_card_gradient</item>
+    <item name="card_gradient" type="drawable">@drawable/light_card_gradient_2</item>
+    <item name="primaryColor" type="color">#273687</item>
+    <item name="colorPrimaryVariant" type="color">#182881</item>
+    <item name="colorSecondaryVariant" type="color">#8B9DFF</item>
 </resources>
