@@ -107,10 +107,9 @@ public class PassivosFragment extends Fragment {
 
         ArrayList data = getData();
         ArrayList types = new ArrayList();
-        types.add("Services");
-        types.add("Pleasure");
-        types.add("Food");
-        types.add("Others");
+        types.add("Venda");
+        types.add("Empréstimo");
+        types.add("Salário");
         Movimento move ;
         double soma;
         String type, type2;
@@ -120,9 +119,13 @@ public class PassivosFragment extends Fragment {
             type = (String) types.get(i);
             for(int j =0; j< data.size();j++){
                 move = (Movimento) data.get(j);
-                type2 = (String) move.getTipo();
-                if(type.equals(type2)){
-                    soma += move.getValor();
+                Database database = new Database(getContext());
+                Entidade entidade = database.getEntidade(move.getEntidade());
+                if(entidade != null) {
+                    type2 = (String) entidade.getCategoria();
+                    if(type.equals(type2)){
+                        soma += move.getValor();
+                    }
                 }
             }
             barEntriesArrayList.add(new BarEntry(i,(float) soma));
