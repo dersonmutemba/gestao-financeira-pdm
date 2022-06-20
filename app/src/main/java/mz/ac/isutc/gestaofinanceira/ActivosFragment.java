@@ -16,9 +16,12 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
@@ -57,7 +60,7 @@ public class ActivosFragment extends Fragment {
         getBarEntries();
 
         // creating a new bar data set.
-        barDataSet = new BarDataSet(barEntriesArrayList, "Dayyaan Antunes");
+        barDataSet = new BarDataSet(barEntriesArrayList, "Data analysis");
 
         // creating a new bar data and
         // passing our bar data set.
@@ -93,6 +96,15 @@ public class ActivosFragment extends Fragment {
     }
 
 
+    private ArrayList getData(){
 
+        ArrayList moves = new ArrayList();
+        moves.add(new move(124,"Servicos"));
+        moves.add(new move(124,"Boladas"));
+        moves.add(new move(124,"Arrendamento"));
+        moves.add(new move(124,"Alimentacao"));
 
+        return moves;
+
+    }
 }
