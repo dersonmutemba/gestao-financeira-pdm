@@ -1,4 +1,4 @@
-# gestao-financeira-pdm
+# Software de Gestão Financeira
 Projecto de Programação para Dispositivos Móveis
 
 Este é um Software de Gestão Financeira, para controle de finanças pessoas, podendo usado para gestão de contas bancárias e não só. Registo de entidades, subscrições, controle de movimentos e mais. Para Android, desenvolvido usando Java e UI feita usando Material 3 da Google.
